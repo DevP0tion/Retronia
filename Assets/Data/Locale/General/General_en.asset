@@ -22,6 +22,26 @@ MonoBehaviour:
     m_Localized: Touch to Start!
     m_Metadata:
       m_Items: []
+  - m_Id: 4296021805334528
+    m_Localized: Aircraft Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4305307637874688
+    m_Localized: Atk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4307542962831360
+    m_Localized: Def
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4308042395385856
+    m_Localized: Hp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4308325049532416
+    m_Localized: Critical Chance
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
