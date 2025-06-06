@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Retronia.Utils
+namespace Retronia.IO
 {
-  public static class JsonUtility
+  public static class JsonUtil
   {
     public static JValue ToToken<T>(this T enumValue) where T : struct, Enum
     {
@@ -11,11 +12,22 @@ namespace Retronia.Utils
       return new JValue(value);
     }
     
-    public static T ToEnum<T>(this JValue token, T defaultValue) where T : struct, Enum
+    public static T ToEnum<T>(this JToken token, T defaultValue = default) where T : struct, Enum
     {
       var value = token.Value<int>();
 
       return Enum.IsDefined(typeof(T), value) ? (T) Enum.ToObject(typeof(T), token.Value<int>()) : defaultValue;
+    }
+
+    public static JObject ToJson<T>(this Dictionary<string, T> dictionary) 
+    {
+      var json = new JObject();
+      foreach (var (key, value) in dictionary)
+      {
+        json[key] = JValue.CreateString(value.ToString());
+      }
+
+      return json;
     }
     
     #region Getter 
