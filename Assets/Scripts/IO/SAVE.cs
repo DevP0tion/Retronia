@@ -19,7 +19,6 @@ namespace Retronia.IO
     public SAVE(string name, bool isRoot = true) : base()
     {
       this.name = name;
-      this["test"] = 123;
     }
     
     public async Task Save()
