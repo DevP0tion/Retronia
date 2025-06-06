@@ -20,9 +20,13 @@ namespace Retronia.Editor
     public static void LoadSave()
     {
       var task = SAVE.Load("Test Save Data");
-      task.Wait();
-      var save = task.Result;
-      Debug.Log(save.ToString());
+      task.ContinueWith((_, _) =>
+      {
+        var save = task.Result;
+        Debug.Log(save.ToString());
+        Debug.Log(save.player.ToString());
+        
+      }, TaskContinuationOptions.OnlyOnRanToCompletion);
     }
   }
 }
