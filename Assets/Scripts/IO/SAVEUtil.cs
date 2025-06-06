@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Retronia.IO
 {
-  public static class SAVEUtility
+  public static class SAVEUtil
   {
     public static async Task<SAVE> LoadSave(this FileInfo info, bool general = true)
     {
