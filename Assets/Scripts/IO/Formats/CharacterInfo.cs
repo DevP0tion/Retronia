@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Retronia.Contents;
-using Retronia.Utils;
 
 namespace Retronia.IO.Formats
 {
@@ -17,10 +16,33 @@ namespace Retronia.IO.Formats
     public int exp = 0;
     public int gold = 1000;
 
-    public Dictionary<string, int> status = new();
+    /// <summary>
+    /// 10렙마다 요구량 크게 증가, 그 외에는 조금씩 증가
+    /// </summary>
+    public int MaxExp
+    {
+      get
+      {
+        var value = level / 10;
+        return value * (value + level % 10);
+      }
+    }
+
+    public readonly Dictionary<string, int> status = new()
+    {
+      ["hp"] = 100,
+      ["atk"] = 35,
+      ["def"] = 40,
+      ["crit"] = 25,
+    };
 
     public CharacterInfo()
     {
+    }
+
+    public CharacterInfo(JObject json)
+    {
+      LoadJson(json);
     }
 
     public void LoadJson(JObject json)

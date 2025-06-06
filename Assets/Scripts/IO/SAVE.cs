@@ -29,7 +29,6 @@ namespace Retronia.IO
     public SAVE(string name, bool isRoot = true)
     {
       this.name = name;
-      player = new CharacterInfo();
     }
     
     public async Task Save()
@@ -95,7 +94,7 @@ namespace Retronia.IO
             switch (key)
             {
               case nameof(player):
-                result.player.LoadJson((JObject)value);
+                result.player = new((JObject)value);
                 break;
               default:
                 result[key] = value;
