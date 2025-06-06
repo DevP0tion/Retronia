@@ -30,13 +30,19 @@ namespace Retronia.IO.Formats
       exp = json.TryGetValue(nameof(exp), out token) ? token.Value<int>() : exp;
       gold = json.TryGetValue(nameof(gold), out token) ? token.Value<int>() : gold;
       elemental = json.TryGetValue(nameof(elemental), out token) ? token.ToEnum(elemental) : elemental;
+
+      if (json.TryGetValue(nameof(status), out token) && token is JObject dic)
+      {
+        foreach (var (key, value) in dic)
+        {
+          if (value is not null)
+            status[key] = value.Value<int>();
+        }
+      }
     }
 
     public JObject ToJson()
     {
-      var status = new JObject();
-      
-      
       return new JObject
       {
         [nameof(name)] = name,
@@ -44,6 +50,7 @@ namespace Retronia.IO.Formats
         [nameof(exp)] = exp,
         [nameof(gold)] = gold,
         [nameof(elemental)] = elemental.ToToken(),
+        [nameof(status)] = status.DicToJObject()
       };
     }
   }

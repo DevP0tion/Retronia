@@ -19,15 +19,42 @@ namespace Retronia.IO
       return Enum.IsDefined(typeof(T), value) ? (T) Enum.ToObject(typeof(T), token.Value<int>()) : defaultValue;
     }
 
-    public static JObject ToJson<T>(this Dictionary<string, T> dictionary) 
+    public static JObject ToJObject<T>(this T value) => value switch
+    {
+      int i => new JObject(i),
+      float f => new JObject(f),
+      string s => new JObject(s),
+      bool b => new JObject(b),
+      IJsonSerializable jsonSerializable => jsonSerializable.ToJson(),
+      _ => new JObject(value.ToString())
+    };
+    
+
+    public static JObject DicToJObject<T>(this IDictionary<string, T> dictionary)
     {
       var json = new JObject();
+      
       foreach (var (key, value) in dictionary)
       {
-        json[key] = JValue.CreateString(value.ToString());
+        json[key] = value.ToJObject();
       }
 
       return json;
+    }
+
+    public static Dictionary<string, T> ToDictionary<T>(this JObject json)
+    {
+      var result = new Dictionary<string, T>();
+      
+      foreach (var (key, value) in json)
+      {
+        if (value is not null)
+        {
+          result[key] = value.ToObject<T>();
+        }
+      }
+      
+      return result;
     }
     
     #region Getter 
