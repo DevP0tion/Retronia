@@ -7,7 +7,7 @@ namespace Retronia.Scenes.Lobby
 {
   public class LobbySystem : MonoBehaviour
   {
-    [SerializeField] private SAVE data = new("Test Save");
+    private static SAVE Data => SAVE.Current;
     
     #region Menu UI
     [Header( "Menu UI" )]
@@ -17,11 +17,11 @@ namespace Retronia.Scenes.Lobby
 
     private void InitMenu()
     {
-      if (data != null)
+      if (Data != null)
       {
-        elementalText.text = data.GetString("elemental", "normal");
-        nameText.text = data.name;
-        levelText.text = data.name;
+        elementalText.text = Data.GetString("elemental", "normal");
+        nameText.text = Data.name;
+        levelText.text = Data.name;
       }
     }
     #endregion
@@ -52,8 +52,6 @@ namespace Retronia.Scenes.Lobby
     
     private void Start()
     {
-      data = SAVE.Current;
-      
       InitMenu();
       InitStatus();
       InitInventory();

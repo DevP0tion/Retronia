@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Retronia.IO.Formats;
 using UnityEngine;
 
 namespace Retronia.IO
@@ -16,9 +18,16 @@ namespace Retronia.IO
   {
     public readonly string name;
     
-    public SAVE(string name, bool isRoot = true) : base()
+    #region Modules
+    
+    public PlayerInfo player;
+    
+    #endregion
+    
+    public SAVE(string name, bool isRoot = true)
     {
       this.name = name;
+      player = new PlayerInfo();
     }
     
     public async Task Save()
@@ -31,10 +40,24 @@ namespace Retronia.IO
       var writer = File.CreateText(path);
       var jsonWriter = new JsonTextWriter(writer);
       jsonWriter.Formatting = Formatting.Indented;
-      await WriteToAsync(jsonWriter);
-      Debug.Log($"Save as {path} Complete!");
       
+      // 데이터를 json 문자열 데이터로 변환
+      var writeData = new JObject(this)
+      {
+        [nameof(player)] = player.ToJson(),
+      };
+
+      await writeData.WriteToAsync(jsonWriter);
+      
+#if UNITY_EDITOR
+      Debug.Log($"Save as {path} Complete!");
+#endif
       writer.Close();
+    }
+
+    public void SaveSync()
+    {
+      Save().Wait();
     }
 
     public bool CheckIntegrity()
@@ -64,7 +87,19 @@ namespace Retronia.IO
         if (await ReadFromAsync(reader) is JObject obj)
         {
           foreach (var (key, value) in obj)
-            result[key] = value;
+          {
+            if(value is null) continue;
+
+            switch (key)
+            {
+              case nameof(player):
+                result.player.LoadJson((JObject)value);
+                break;
+              default:
+                result[key] = value;
+                break;
+            }
+          }
           
           return result;
         }

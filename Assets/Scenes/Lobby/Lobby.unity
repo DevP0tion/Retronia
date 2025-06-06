@@ -546,6 +546,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4aa21a0c86462d8f0cd9dd477d011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    player:
+      name: Alpha
+      level: 1
+      exp: 0
+      gold: 1000
   menuUI: {fileID: 1231664406}
   elementalText: {fileID: 270363860}
   nameText: {fileID: 230070779}
@@ -587,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 29.285, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478984190
@@ -713,7 +719,6 @@ GameObject:
   - component: {fileID: 489399501}
   - component: {fileID: 489399500}
   - component: {fileID: 489399499}
-  - component: {fileID: 489399503}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -805,24 +810,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &489399503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489399498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4aa21a0c86462d8f0cd9dd477d011b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuUI: {fileID: 1231664406}
-  elementalText: {fileID: 0}
-  nameText: {fileID: 0}
-  levelText: {fileID: 0}
-  statusUI: {fileID: 1359596191}
-  inventoryUI: {fileID: 1964740186}
 --- !u!1 &676543141
 GameObject:
   m_ObjectHideFlags: 0

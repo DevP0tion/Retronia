@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using NUnit.Framework;
 using Retronia.IO;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Retronia.Editor
 {
@@ -15,10 +17,11 @@ namespace Retronia.Editor
     }
 
     [Test]
-    public static async void LoadSave()
+    public static void LoadSave()
     {
-      var save = await SAVE.Load("Test Save Data");
-      
+      var task = SAVE.Load("Test Save Data");
+      task.Wait();
+      var save = task.Result;
       Debug.Log(save.ToString());
     }
   }
