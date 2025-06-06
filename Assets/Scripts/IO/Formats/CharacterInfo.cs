@@ -33,7 +33,7 @@ namespace Retronia.IO.Formats
       ["hp"] = 100,
       ["atk"] = 35,
       ["def"] = 40,
-      ["crit"] = 25,
+      ["critChance"] = 25,
     };
 
     public CharacterInfo()

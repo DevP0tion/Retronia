@@ -43,7 +43,10 @@ namespace Retronia.Scenes.Lobby
     
     private void InitStatus()
     {
-      
+      atkText.text = PlayerData.status["atk"].ToString();
+      defText.text = PlayerData.status["def"].ToString();
+      hpText.text = PlayerData.status["hp"].ToString();
+      critChanceText.text = PlayerData.status["critChance"].ToString();
     }
     #endregion
     
