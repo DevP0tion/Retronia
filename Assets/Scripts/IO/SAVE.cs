@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Retronia.IO.Formats;
 using UnityEngine;
+using UnityEngine.Serialization;
+using CharacterInfo = Retronia.IO.Formats.CharacterInfo;
 
 namespace Retronia.IO
 {
@@ -20,14 +22,14 @@ namespace Retronia.IO
     
     #region Modules
     
-    public PlayerInfo player;
+    [FormerlySerializedAs("character")] public CharacterInfo player;
     
     #endregion
     
     public SAVE(string name, bool isRoot = true)
     {
       this.name = name;
-      player = new PlayerInfo();
+      player = new CharacterInfo();
     }
     
     public async Task Save()
