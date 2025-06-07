@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Global_inventoryLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 4636030651564032
+    m_Key: Global_statusLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
