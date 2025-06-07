@@ -24,7 +24,7 @@ namespace Retronia.IO.Formats
     {
       get
       {
-        var value = level / 10;
+        var value = Math.Max(level / 10, 1);
         return value * (value + level % 10);
       }
     }
