@@ -17,10 +17,28 @@ namespace Retronia.Scenes.Lobby
 
     public void SetItem(ItemStack itemStack)
     {
-      stack = itemStack;
-      item.sprite = itemStack.type.sprite;
-      item.color = itemStack.type.color;
-      amountText.text = itemStack.type.maxAmount.ToString();
+      if (itemStack != null)
+      {
+        if (stack != itemStack)
+        {
+          itemStack.onAmountChange.AddListener(SetAmount);
+          stack?.onAmountChange.RemoveListener(SetAmount);
+        }
+        stack = itemStack;
+        item.sprite = itemStack.type.sprite;
+        item.color = itemStack.type.color;
+        amountText.text = itemStack.type.maxAmount.ToString();
+      }
+      else if(stack != null)
+      {
+        stack.onAmountChange.RemoveListener(SetAmount);
+        stack = null;
+        item.sprite = null;
+        item.color = Color.clear;
+        amountText.text = 0 + "";
+      }
     }
+
+    private void SetAmount(int newAmount) => amountText.text = newAmount + "";
   }
 }

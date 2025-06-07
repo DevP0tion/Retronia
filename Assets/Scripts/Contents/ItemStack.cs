@@ -15,12 +15,18 @@ namespace Retronia.Contents
     private static Dictionary<string, ItemProperties> items = new();
 
     public ItemProperties type = ItemProperties.None;
-    public UnityEvent onChange;
+    // 바뀔 새로운 값을 넘겨줍니다.
+    public UnityEvent<int> onAmountChange;
     [SerializeField, GetSet(nameof(Amount))] protected int amount;
     public int Amount
     {
       get => amount;
-      set => amount = Math.Max(Math.Min(type.maxAmount, value), 0);
+      set
+      {
+        var newValue = Math.Max(Math.Min(type.maxAmount, value), 0);
+        onAmountChange?.Invoke(newValue);
+        amount = newValue;
+      }
     }
 
     public ItemStack(ItemProperties type = null, int amount = 1)
