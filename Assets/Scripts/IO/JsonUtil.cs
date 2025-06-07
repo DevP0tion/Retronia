@@ -58,27 +58,6 @@ namespace Retronia.IO
     }
     
     #region Getter 
-    
-    public static string GetString(this JObject json, string key, string defaultValue = null)
-    {
-      if (json.TryGetValue(key, out var token))
-      {
-        var value = token.Value<string>();
-        
-        return string.IsNullOrEmpty(value) ? defaultValue : value;
-      }
-      
-      return defaultValue;
-    }
-    
-    public static int GetInt(this JObject json, string key, int defaultValue = 0)
-      => json.TryGetValue(key, out var token) ? token.Value<int>() : defaultValue;
-    
-    public static float GetFloat(this JObject json, string key, float defaultValue = 0)
-    => json.TryGetValue(key, out var token) ? token.Value<float>() : defaultValue;
-
-    public static bool GetBool(this JObject json, string key, bool defaultValue = false)
-    => json.TryGetValue(key, out var token) ? token.Value<bool>() : defaultValue;
 
     public static T GetEnum<T>(this JObject json, string key, T defaultValue = default) where T : struct, Enum
     {
