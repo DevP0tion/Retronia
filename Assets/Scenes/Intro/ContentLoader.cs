@@ -1,3 +1,4 @@
+using Retronia.Contents.Properties;
 using Retronia.Core;
 using Retronia.Utils;
 using TMPro;
@@ -32,6 +33,9 @@ namespace Retronia.Scenes.Intro
     {
       Localizer.Load();
       GameManager.Instance.Load();
+      var itemLoadTask = ItemProperties.LoadItems();
+
+      itemLoadTask.Wait();
     }
   }
 }

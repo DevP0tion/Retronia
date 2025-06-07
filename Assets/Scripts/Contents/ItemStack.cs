@@ -14,7 +14,7 @@ namespace Retronia.Contents
   {
     private static Dictionary<string, ItemProperties> items = new();
 
-    public ItemProperties type;
+    public ItemProperties type = ItemProperties.None;
     public UnityEvent onChange;
     [SerializeField, GetSet(nameof(Amount))] protected int amount;
     public int Amount
