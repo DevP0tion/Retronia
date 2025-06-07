@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5acfb431-c427-4efc-9307-fefcf6ea7c4c" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIItemSlotBar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIItemSlotBar.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Retronia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Retronia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/ItemSlot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/ItemSlot.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/Lobby.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIItemSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIItemSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Contents/ItemStack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Contents/ItemStack.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +138,7 @@
       <updated>1748831690399</updated>
       <workItem from="1748831697395" duration="25043000" />
       <workItem from="1748951775126" duration="101094000" />
-      <workItem from="1749290959899" duration="1722000" />
+      <workItem from="1749290959899" duration="4874000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
