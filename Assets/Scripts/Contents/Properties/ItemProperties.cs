@@ -8,5 +8,8 @@ namespace Retronia.Contents.Properties
     public Color color;
     public Sprite sprite;
     public int price;
+    public int maxAmount = 64;
+    
+    public static implicit operator ItemStack(ItemProperties item) => new (item);
   }
 }

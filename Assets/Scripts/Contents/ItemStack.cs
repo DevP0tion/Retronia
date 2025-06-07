@@ -1,34 +1,65 @@
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Retronia.Contents.Properties;
+using Retronia.IO;
 using Retronia.Utils;
 using UnityEngine;
 
 namespace Retronia.Contents
 {
   [Serializable]
-  public class ItemStack
+  public class ItemStack : IJsonSerializable
   {
-    /// <summary>
-    /// 임시로 Max값으로 선언.
-    /// 나중에 정상적?인 숫자로 변경예정
-    /// </summary>
-    public const int MaxCount = int.MaxValue;
+    private static Dictionary<string, ItemProperties> items = new();
 
-    public ItemProperties item;
-    [SerializeField, GetSet(nameof(Count))] protected int count;
-    public int Count
+    public ItemProperties type;
+    [SerializeField, GetSet(nameof(Amount))] protected int amount;
+    public int Amount
     {
-      get => count;
-      set => count = Math.Max(Math.Min(MaxCount, value), 0);
+      get => amount;
+      set => amount = Math.Max(Math.Min(type.maxAmount, value), 0);
     }
 
-    public ItemStack(ItemProperties item, int count = 0)
+    public ItemStack()
     {
-      this.item = item;
-      Count = count;
+      type = null;
+      amount = 0;
+    }
+
+    public ItemStack(ItemProperties type, int amount = 0)
+    {
+      this.type = type;
+      Amount = amount;
     }
     
-    public static implicit operator ItemStack(ItemProperties item) => new (item);
-    public static implicit operator ItemProperties(ItemStack item) => item.item;
+    public static implicit operator ItemProperties(ItemStack item) => item.type;
+    
+    #region Serialization
+
+    public static ItemStack Load(JObject json)
+    {
+      var result = new ItemStack();
+      result.LoadJson(json);
+      
+      return result; 
+    }
+    
+    public void LoadJson(JObject json)
+    {
+      type = items.GetValueOrDefault(json.Get("type", "none"));
+      amount = json.Get("amount", 0);
+    }
+
+    public JObject ToJson()
+    {
+      return new()
+      {
+        ["type"] = type.name,
+        ["amount"] = amount
+      };
+    }
+    
+    #endregion
   }
 }

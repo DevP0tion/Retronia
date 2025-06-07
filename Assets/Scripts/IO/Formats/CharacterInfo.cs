@@ -15,6 +15,7 @@ namespace Retronia.IO.Formats
     public int level = 1;
     public int exp = 0;
     public int gold = 1000;
+    public Inventory inventory = new();
 
     /// <summary>
     /// 10렙마다 요구량 크게 증가, 그 외에는 조금씩 증가
@@ -36,13 +37,10 @@ namespace Retronia.IO.Formats
       ["critChance"] = 25,
     };
 
-    public CharacterInfo()
+    public CharacterInfo(JObject json = null)
     {
-    }
-
-    public CharacterInfo(JObject json)
-    {
-      LoadJson(json);
+      if(json != null)
+        LoadJson(json);
     }
 
     public void LoadJson(JObject json)
@@ -61,6 +59,9 @@ namespace Retronia.IO.Formats
             status[key] = value.Value<int>();
         }
       }
+      
+      if(json.TryGetValue(nameof(inventory), out token) && token is JObject inventoryJson)
+        inventory.LoadJson(inventoryJson);
     }
 
     public JObject ToJson()
@@ -72,7 +73,8 @@ namespace Retronia.IO.Formats
         [nameof(exp)] = exp,
         [nameof(gold)] = gold,
         [nameof(elemental)] = elemental.ToToken(),
-        [nameof(status)] = status.DicToJObject()
+        [nameof(status)] = status.DicToJObject(),
+        [nameof(inventory)] = inventory.ToJson()
       };
     }
   }
