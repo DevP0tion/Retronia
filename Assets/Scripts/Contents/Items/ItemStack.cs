@@ -7,7 +7,7 @@ using Retronia.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Retronia.Contents
+namespace Retronia.Contents.Items
 {
   [Serializable]
   public class ItemStack : IJsonSerializable

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Retronia.Contents;
+using Retronia.Contents.Items;
 using UnityEngine;
 
 namespace Retronia.IO.Formats

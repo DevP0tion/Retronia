@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Retronia.Contents.Items;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: Global_statusLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 4644570166427648
+    m_Key: General_smithyLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

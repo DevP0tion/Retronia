@@ -1,4 +1,5 @@
 using Retronia.Contents;
+using Retronia.Contents.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
