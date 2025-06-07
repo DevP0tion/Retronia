@@ -19,16 +19,26 @@ namespace Retronia.IO
   public class SAVE : JObject
   {
     public readonly string name;
+    [SerializeField] private bool initialized = false;
+    public bool IsInitialized => initialized;
     
     #region Modules
     
-    [FormerlySerializedAs("character")] public CharacterInfo player;
+    public CharacterInfo player = null;
     
     #endregion
     
     public SAVE(string name, bool isRoot = true)
     {
       this.name = name;
+    }
+
+    public void Init()
+    {
+      if(initialized) return;
+      initialized = true;
+
+      if (player == null) player = new();
     }
     
     public async Task Save()
@@ -101,7 +111,7 @@ namespace Retronia.IO
                 break;
             }
           }
-          
+          result.Init();
           return result;
         }
       }
