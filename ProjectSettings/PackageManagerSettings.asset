@@ -34,7 +34,47 @@ MonoBehaviour:
     m_IsDefault: 0
     m_Capabilities: 0
     m_ConfigSource: 4
-  m_UserSelectedRegistryName: Rain Office
+  - m_Id: scoped:project:NugetForUnity
+    m_Name: NugetForUnity
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.github-glitchenzo.nugetforunity
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:MessagePack
+    m_Name: MessagePack
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.github.messagepack-csharp
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:UniTask
+    m_Name: UniTask
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.cysharp.unitask
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:SteamWorks
+    m_Name: SteamWorks
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.rlabrecque.steamworks.net
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:NaughtyAttributes
+    m_Name: NaughtyAttributes
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.dbrizov.naughtyattributes
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  m_UserSelectedRegistryName: NaughtyAttributes
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
