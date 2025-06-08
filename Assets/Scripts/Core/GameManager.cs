@@ -9,7 +9,7 @@ namespace Retronia.Core
 { 
   public class GameManager : MonoBehaviour
   {
-    public static GameManager Instance {get; private set;}
+    public static GameManager Instance { get; private set; }
     
     /// <summary>
     /// 현재 활성화된 언어의 키에 맞는 문자열을 가져올 수 있습니다.

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Retronia.Contents.Items;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -22,12 +23,15 @@ namespace Retronia.Contents.Properties
     
     #region Initialization
 
-    public static async Task LoadItems()
+    /// <summary>
+    /// 멀티스레드 비동기 로딩 구현을 하고싶었는데 비동기 구현시 무한로딩 문제???
+    /// </summary>
+    public static void Load()
     {
-      await Addressables.LoadAssetsAsync<ItemProperties>(new AssetLabelReference{labelString = Label}, properties =>
+      Addressables.LoadAssetsAsync<ItemProperties>(new AssetLabelReference{labelString = Label}, properties =>
       {
         items[properties.name] = properties;
-      }).Task;
+      }).WaitForCompletion();
     }
     
     #endregion
