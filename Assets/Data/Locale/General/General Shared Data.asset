@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: General_smithyLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 4926634308632576
+    m_Key: Global_campaignLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
