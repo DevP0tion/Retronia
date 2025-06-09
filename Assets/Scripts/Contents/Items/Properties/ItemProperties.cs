@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Retronia.Contents.Properties
 {
-  [CreateAssetMenu(fileName = "new Item Properties", menuName = "Retronia/Item Properties")]
+  [CreateAssetMenu(fileName = "new Item Properties", menuName = "Properties/Basic Item")]
   public class ItemProperties : ScriptableObject
   {
     public static bool Loaded { get; private set; } = false;
@@ -21,7 +21,8 @@ namespace Retronia.Contents.Properties
     public int price;
     public int maxAmount = 64;
     
-    public static implicit operator ItemStack(ItemProperties item) => new (item);
+    public virtual ItemStack Instantiate(int amount)
+      => new (this, amount);
     
     #region Initialization
 
