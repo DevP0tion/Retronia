@@ -17,7 +17,7 @@ namespace Retronia.Scenes.Lobby
 
     #endregion
 
-    private void RegenerateInventoryUI()
+    public void RegenerateInventoryUI()
     {
       var inventorySize = InventorySize / 3 + 1;
       if(activeBars != null)
@@ -60,6 +60,7 @@ namespace Retronia.Scenes.Lobby
         }
       }
       
+      // 마지막 줄 개수 설정
       var lastSize = InventorySize % 3;
       if (lastSize != 0)
       {
@@ -70,15 +71,15 @@ namespace Retronia.Scenes.Lobby
           lastBar[i].gameObject.SetActive(true);
         }
       }
+      
+      // 슬롯마다 아이템 설정
+      for (var i = 0; i < InventorySize; i++)
+      {
+        var item = Inventory.GetItem(i);
+        var slot = activeBars[i / 3][i % 3];
+        slot.SetItem(item);
+      }
     }
     
-    #region Unity Event
-    
-    private void Start()
-    {
-      RegenerateInventoryUI();
-    }
-    
-    #endregion
   }
 }

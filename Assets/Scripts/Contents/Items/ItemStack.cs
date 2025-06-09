@@ -16,7 +16,7 @@ namespace Retronia.Contents.Items
 
     public ItemProperties type = ItemProperties.None;
     // 바뀔 새로운 값을 넘겨줍니다.
-    public UnityEvent<int> onAmountChange;
+    public UnityEvent<int> onAmountChange = new();
     [SerializeField, GetSet(nameof(Amount))] protected int amount;
     public int Amount
     {

@@ -71,10 +71,11 @@ namespace Retronia.Scenes.Lobby
     [Header( "Inventory UI" )]
     
     [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private UIInventory inventory;
 
     private void InitInventory()
     {
-      
+      inventory.RegenerateInventoryUI();
     }
     #endregion
     

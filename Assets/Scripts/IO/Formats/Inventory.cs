@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Retronia.Contents;
 using Retronia.Contents.Items;
+using Retronia.Contents.Properties;
 using UnityEngine;
 
 namespace Retronia.IO.Formats
@@ -114,6 +115,25 @@ namespace Retronia.IO.Formats
         throw new InvalidOperationException("인벤토리가 가득 찼습니다.");
         
       items[index] = item;
+    }
+
+    public void AddItem(ItemProperties type, int amount = 1) => Add(new ItemStack(type, amount));
+
+    public void AddItem(string itemName, int amount = 1)
+    {
+      if(ItemProperties.items.TryGetValue(itemName, out var item))
+        Add(new ItemStack(item, amount));
+      else
+        throw new ArgumentException($"Item {itemName} is not found.");
+    }
+    
+    public ItemStack GetItem(ItemProperties type) => items.FirstOrDefault(item => item?.type == type);
+    public ItemStack GetItem(string itemName) => items.FirstOrDefault(item => item?.type.name == itemName);
+    public ItemStack GetItem(int index) => items[index];
+    public bool TryGetItem(int index, out ItemStack itemStack)
+    {
+      itemStack = items[index];
+      return itemStack != null;
     }
 
     public void Clear() => Array.Clear(items, 0, Size);

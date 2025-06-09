@@ -22,8 +22,10 @@ namespace Retronia.Scenes.MainMenu
     public void CreateSave(TMP_InputField nameLabel)
     {
       // TODO 생성시 명칭 설정 가능하게 구현
-      SAVE.Current = new SAVE(nameLabel.text);
-      SAVE.Current.Init();
+      var newData = SAVE.Current = new SAVE(nameLabel.text);
+      newData.Init();
+      newData.player.inventory.AddItem("Gem", 10);
+      newData.player.inventory.AddItem("Meteorite", 2);
       SceneManager.LoadScene(SceneNames.Lobby);
     }
     
