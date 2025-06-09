@@ -1,4 +1,5 @@
 using Retronia.IO;
+using Retronia.Utils;
 using Retronia.Utils.UI;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,22 @@ namespace Retronia.Scenes.Lobby
   {
     private static SAVE Data => SAVE.Current;
     private static CharacterInfo PlayerData => CharacterInfo.Current;
+    
+    #region Binding
+    [Header( "Binding" )]
+    
+    [SerializeField] private CharacterView characterView;
+    
+    #endregion
+
+    public bool OpenEquipSlots
+    {
+      get => characterView && characterView.OpenSlots;
+      set
+      {
+        if(characterView) characterView.OpenSlots = value;
+      }
+    }
     
     #region Menu UI
     [Header( "Menu UI / Binding" )]
@@ -71,5 +88,11 @@ namespace Retronia.Scenes.Lobby
     }
     
     #endregion
+    
+    #if UNITY_EDITOR
+    
+    [SerializeField, GetSet(nameof(OpenEquipSlots))] private bool openEquipSlots = false;
+    
+    #endif
   }
 }
