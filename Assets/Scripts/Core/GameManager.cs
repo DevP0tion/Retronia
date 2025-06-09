@@ -1,9 +1,8 @@
 using NaughtyAttributes;
+using Retronia.Contents.Properties;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Audio;
 using UnityEngine.Localization.Tables;
-using UnityEngine.SceneManagement;
 
 namespace Retronia.Core
 { 
@@ -33,6 +32,13 @@ namespace Retronia.Core
     public void Load()
     {
     }
+    
+    #if UNITY_EDITOR
+    // 유니티 에디터 전용 에셋 로딩 확인용 코드
+    
+    public SerializableDictionary<string, ItemProperties> loadedItems = new();
+    public SerializableDictionary<string, AudioClip> loadedAudios = new();
+    #endif
 
     [Button]
     private void Test()

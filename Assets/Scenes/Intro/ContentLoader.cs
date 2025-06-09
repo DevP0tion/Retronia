@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Retronia.Contents.Properties;
 using Retronia.Core;
 using Retronia.Utils;
@@ -34,8 +33,13 @@ namespace Retronia.Scenes.Intro
     {
       Localizer.Load();
       GameManager.Instance.Load();
-      
-      ItemProperties.Load();
+
+      var loader = new [] { ItemProperties.Load(), AudioManager.Load() };
+
+      foreach (var operation in loader)
+      {
+        operation.WaitForCompletion();
+      }
     }
   }
 }
