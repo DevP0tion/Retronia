@@ -55,6 +55,22 @@ MonoBehaviour:
     m_Key: Global_campaignLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 5332751866101760
+    m_Key: MainMenu_single
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5333071430123520
+    m_Key: MainMenu_multiplayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5333304763449344
+    m_Key: Global_setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5336434674728960
+    m_Key: Global_exit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
