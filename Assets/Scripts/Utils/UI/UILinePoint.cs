@@ -31,7 +31,7 @@ namespace Retronia.Utils.UI
       Vector3 pos = transform.position, nextPos = next.transform.position;
       
       lineRect.SetParent(transform);
-      lineRect.anchoredPosition = new Vector2(1, 1);
+      lineRect.anchoredPosition = new Vector2(0.5f, 0.5f);
       lineImage.rectTransform.sizeDelta = new Vector2(Vector2.Distance(pos, nextPos) / 2, lineImage.rectTransform.sizeDelta.y);
       
       var vec = pos - nextPos;
