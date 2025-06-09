@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Retronia.Core
 {
@@ -10,15 +12,20 @@ namespace Retronia.Core
   /// 싱글톤보다 정적 클래스가 접근하기 편할 것 같아 정적 클래스로 구현했습니다.
   /// 각 값은 SoundManager 초기화시 자동으로 불러오며, 값을 설정시 해당 값을 자동으로 저장합니다.
   /// </summary>
-  public static class SoundManager
+  public static class AudioManager
   {
+    public static bool Loaded { get; private set; } = false;
+    public const string Label = "Audio";
     private static AudioSource effectSource, backgroundSource;
     private static AudioMixerGroup effectGroup, backgroundGroup, objectGroup;
+    public static readonly Dictionary<string, AudioClip> Clips = new();
     
-    static SoundManager()
+    static AudioManager()
     {
-      Mixer = Addressables.LoadAssetAsync<AudioMixer>(new AssetReference("AudioMixer")).WaitForCompletion();
+      Mixer = Addressables.LoadAssetAsync<AudioMixer>(new AssetLabelReference{labelString = Label}).WaitForCompletion();
     }
+
+    #region Volumes
 
     private static AudioMixer mixer;
     public static AudioMixer Mixer
@@ -155,13 +162,13 @@ namespace Retronia.Core
       }
     }
 
+    #endregion
+
     public static void Play(AudioClip clip, GameObject obj)
     {
       if(!Mixer) return;
-      
-      AudioSource source;
-      
-      if (obj.TryGetComponent(out source)) {}
+
+      if (obj.TryGetComponent(out AudioSource source)) {}
       else source = obj.AddComponent<AudioSource>();
       
       source.clip = clip;
@@ -183,6 +190,24 @@ namespace Retronia.Core
       source.clip = clip;
       source.outputAudioMixerGroup = type == SoundType.Background ? backgroundGroup : effectGroup;
       source.Play();
+    }
+
+    /// <summary>
+    /// 기술 문제로 인한 동기 로더 구현 
+    /// </summary>
+    public static AsyncOperationHandle Load()
+    {
+      if(Loaded) throw new InvalidOperationException("SoundManager is already loaded.");
+      Loaded = true;
+
+      return Addressables.LoadAssetsAsync<AudioClip>(new AssetLabelReference { labelString = Label }, clip =>
+      {
+        Clips[clip.name] = clip;
+        
+        #if UNITY_EDITOR
+        GameManager.Instance.loadedAudios[clip.name] = clip;
+        #endif
+      });
     }
   }
 

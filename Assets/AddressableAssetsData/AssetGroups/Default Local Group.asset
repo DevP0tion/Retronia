@@ -29,6 +29,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Item
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09fae934d24d07f4b9e1761ef8166373
+    m_Address: Assets/Arts/Sounds
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39076c5dccabce14cb0f2df53f63b22c
+    m_Address: Assets/Settings/AudioMixer.mixer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Audio
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13b2ae3b7933d214a9f7b7353c3dfa40, type: 2}
   m_SchemaSet:
