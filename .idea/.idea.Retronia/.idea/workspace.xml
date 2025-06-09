@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5acfb431-c427-4efc-9307-fefcf6ea7c4c" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Retronia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Retronia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/Lobby.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby/UIInventory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +28,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3789ee403a53437cbb6b5d9ab6311f51573620/90/9fb68c73/KeyValuePair`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/35/63a3adca/IFormattable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/a3/ffcfda92/IConvertible.cs" root0="FORCE_HIGHLIGHTING" />
@@ -43,6 +38,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/443ce614ff11fd4152a3c735dec9ef388c537ef8ea9c24e0f018f1bd619e85/JObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/58b0b7706a8be4f7160749424eb996a3f845a1682c3c7ac5e405a346a8c20f1/JToken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6accde948b246028a84a8fb9b4f314e0ee90abdd609697f4160dc4deb386aef/JsonReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/afbf15ffe1d246139ee6c2134f885f72f33af443adbbbc75353ea8d178c1915/System.Runtime.Serialization.Formatters.Binary.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b583e7d8f82a4d824fae2e16e2af7f00dc92a5cddd53375c554aee1980d145/JContainer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e470ef845fef945ef5da6b7abf3e43341341e4cba91a071d50f21f4b4a4a6/IJEnumerable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Lobby/UIInventory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -139,6 +135,8 @@
       <workItem from="1748831697395" duration="25043000" />
       <workItem from="1748951775126" duration="101094000" />
       <workItem from="1749290959899" duration="4874000" />
+      <workItem from="1749373561088" duration="2709000" />
+      <workItem from="1749432945848" duration="596000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
