@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace Retronia.Scenes.Lobby
 {
-  public class UICharacterView : MonoBehaviour
+  public class CharacterView : MonoBehaviour
   {
     [SerializeField] private UIEquipSlot[] slots = null;
 
