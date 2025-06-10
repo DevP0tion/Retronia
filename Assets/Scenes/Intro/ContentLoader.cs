@@ -1,8 +1,9 @@
 using Retronia.Contents.Properties;
 using Retronia.Core;
 using Retronia.Utils;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Tables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ namespace Retronia.Scenes.Intro
   {
     private StringTable localization;
     [SerializeField] private Button entryButton;
-    [SerializeField] private TMP_Text entryText;
+    [SerializeField] private LocalizeStringEvent entryText;
     
     
     #region Unity Events
@@ -23,7 +24,7 @@ namespace Retronia.Scenes.Intro
       Load();
       
       // 로딩이 완료됬을 시 게임을 시작할 수 있게 설정
-      entryText.text = Localizer.LocalizeWithScene("finished");
+      entryText.StringReference = new LocalizedString("General", "Intro_finished");
       entryButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.MainMenu));
     }
     

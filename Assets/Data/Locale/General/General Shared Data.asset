@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 72ca481d156faed4d89716bd5ee34f59
   m_Entries:
   - m_Id: 4644570166427648
-    m_Key: General_smithyLabel
+    m_Key: Global_smithyLabel
     m_Metadata:
       m_Items: []
   - m_Id: 4305307637874688
@@ -97,6 +97,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5528979610501120
     m_Key: Global_blank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5599710503469056
+    m_Key: Global_loading
     m_Metadata:
       m_Items: []
   m_Metadata:
