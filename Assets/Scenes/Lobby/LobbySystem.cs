@@ -1,4 +1,5 @@
 using Retronia.IO;
+using Retronia.Scenes.Lobby.Panels;
 using Retronia.Utils;
 using Retronia.Utils.UI;
 using TMPro;
@@ -12,11 +13,13 @@ namespace Retronia.Scenes.Lobby
   {
     private static SAVE Data => SAVE.Current;
     private static CharacterInfo PlayerData => CharacterInfo.Current;
+    public static LobbySystem Instance { get; private set; }
     
     #region Binding
     [Header( "Binding" )]
     
     [SerializeField] private CharacterView characterView;
+    public ItemDescriptionPanel itemDescriptionPanel;
     
     #endregion
 
@@ -80,6 +83,18 @@ namespace Retronia.Scenes.Lobby
     #endregion
     
     #region Unity Event
+
+    private void Awake()
+    {
+      if (Instance)
+      {
+        DestroyImmediate(this);
+      }
+      else
+      {
+        Instance = this;
+      }
+    }
     
     private void Start()
     {
