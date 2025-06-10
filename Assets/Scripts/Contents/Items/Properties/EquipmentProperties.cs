@@ -12,6 +12,7 @@ namespace Retronia.Contents.Properties
     public string Name => name;
     public void Equip(CharacterInfo character)
     {
+      Debug.Log(name);
     }
 
     public void Unequip(CharacterInfo character)

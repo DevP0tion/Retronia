@@ -153,7 +153,7 @@ namespace Retronia.IO.Formats
 
     public int IndexOf(ItemStack item)
     {
-      for (var i = 0; i < Count; i++)
+      for (var i = 0; i < Size; i++)
       {
         if (items[i] == item)
           return i;
@@ -188,7 +188,7 @@ namespace Retronia.IO.Formats
       if (index < 0 || index >= Size)
         throw new ArgumentOutOfRangeException(nameof(index));
     
-      items[Count - 1] = null;
+      items[index] = null;
     }
 
     public ItemStack this[int index]

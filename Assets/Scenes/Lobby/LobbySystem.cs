@@ -7,6 +7,7 @@ using Retronia.Utils.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using CharacterInfo = Retronia.IO.Formats.CharacterInfo;
 
 namespace Retronia.Scenes.Lobby
@@ -79,12 +80,12 @@ namespace Retronia.Scenes.Lobby
     #region Inventory UI
     [Header( "Inventory UI" )]
     
-    [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private UIInventory inventory;
+    [SerializeField] private GameObject inventoryObject;
+    [SerializeField] private UIInventory inventoryUI;
 
     private void InitInventory()
     {
-      inventory.RegenerateInventoryUI();
+      inventoryUI.RegenerateInventoryUI();
     }
     #endregion
     
@@ -120,7 +121,13 @@ namespace Retronia.Scenes.Lobby
         var itemStack = focusedSlot?.Stack;
         if (itemStack is { type: IEquipable equipable })
         {
-          
+          if (Character.Equip(equipable))
+          {
+            Inventory.Current.Remove(itemStack);
+            characterView.Equip(itemStack);
+            inventoryUI.RegenerateInventoryUI();
+            itemDescriptionPanel.gameObject.SetActive(false);
+          }
         }
       }
     }

@@ -103,6 +103,30 @@ MonoBehaviour:
     m_Key: Global_loading
     m_Metadata:
       m_Items: []
+  - m_Id: 5694534049038336
+    m_Key: Item_Core_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5694589397073920
+    m_Key: Item_Core_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5694619717697536
+    m_Key: Item_Engine_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5694680300224512
+    m_Key: Item_Engine_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5694703326953472
+    m_Key: Item_Cannon_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5694755088859136
+    m_Key: Item_Cannon_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

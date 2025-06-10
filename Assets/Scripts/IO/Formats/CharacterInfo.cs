@@ -63,15 +63,18 @@ namespace Retronia.IO.Formats
 
     private Dictionary<EquipmentPart, IEquipable> equipments = new();
 
-    public void Equip(IEquipable equipment)
+    public bool Equip(IEquipable equipment)
     {
-      if (equipment == null || !Scheme) return;
+      if (equipment == null || !Scheme) return false;
 
       if (Scheme.allowedPart.Contains(equipment.Part))
       {
         equipments.TryAdd(equipment.Part, equipment);
         equipment.Equip(this);
+        return true;
       }
+      
+      return false;
     }
 
     public void UnEquip(EquipmentPart part)
