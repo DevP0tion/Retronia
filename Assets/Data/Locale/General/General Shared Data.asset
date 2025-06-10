@@ -15,60 +15,84 @@ MonoBehaviour:
   m_TableCollectionName: General
   m_TableCollectionNameGuidString: 72ca481d156faed4d89716bd5ee34f59
   m_Entries:
-  - m_Id: 440769413120
-    m_Key: Intro_finished
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4296021805334528
-    m_Key: Global_characterInfo
+  - m_Id: 4644570166427648
+    m_Key: General_smithyLabel
     m_Metadata:
       m_Items: []
   - m_Id: 4305307637874688
     m_Key: Global_atkLabel
     m_Metadata:
       m_Items: []
-  - m_Id: 4307542962831360
-    m_Key: Global_defLabel
+  - m_Id: 4926634308632576
+    m_Key: Global_campaignLabel
     m_Metadata:
       m_Items: []
-  - m_Id: 4308042395385856
-    m_Key: Global_hpLabel
+  - m_Id: 4296021805334528
+    m_Key: Global_characterInfo
     m_Metadata:
       m_Items: []
   - m_Id: 4308325049532416
     m_Key: Global_critChanceLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 4307542962831360
+    m_Key: Global_defLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5336434674728960
+    m_Key: Global_exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4308042395385856
+    m_Key: Global_hpLabel
+    m_Metadata:
+      m_Items: []
   - m_Id: 4332605418209280
     m_Key: Global_inventoryLabel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4636030651564032
-    m_Key: Global_statusLabel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4644570166427648
-    m_Key: General_smithyLabel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4926634308632576
-    m_Key: Global_campaignLabel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5332751866101760
-    m_Key: MainMenu_single
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5333071430123520
-    m_Key: MainMenu_multiplayer
     m_Metadata:
       m_Items: []
   - m_Id: 5333304763449344
     m_Key: Global_setting
     m_Metadata:
       m_Items: []
-  - m_Id: 5336434674728960
-    m_Key: Global_exit
+  - m_Id: 4636030651564032
+    m_Key: Global_statusLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 440769413120
+    m_Key: Intro_finished
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5520974785511424
+    m_Key: Item_Gem_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5520709713887232
+    m_Key: Item_Gem_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5333071430123520
+    m_Key: MainMenu_multiplayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5332751866101760
+    m_Key: MainMenu_single
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5521000664367104
+    m_Key: Item_None_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5521104297230336
+    m_Key: Item_None_decription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5521189433212928
+    m_Key: Item_Meteorite_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5521194252468224
+    m_Key: Item_Meteorite_description
     m_Metadata:
       m_Items: []
   m_Metadata:
