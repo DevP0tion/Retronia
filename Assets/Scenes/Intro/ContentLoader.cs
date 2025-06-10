@@ -23,7 +23,7 @@ namespace Retronia.Scenes.Intro
       Load();
       
       // 로딩이 완료됬을 시 게임을 시작할 수 있게 설정
-      entryText.text = Localizer.Get("finished");
+      entryText.text = Localizer.LocalizeWithScene("finished");
       entryButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.MainMenu));
     }
     
@@ -31,10 +31,10 @@ namespace Retronia.Scenes.Intro
 
     public void Load()
     {
-      Localizer.Load();
+      var (sharedTableLoader, stringTableLoader) = Localizer.Load();
       GameManager.Instance.Load();
 
-      var loader = new [] { ItemProperties.Load(), AudioManager.Load() };
+      var loader = new [] { sharedTableLoader, stringTableLoader, ItemProperties.Load(), AudioManager.Load() };
 
       foreach (var operation in loader)
       {
