@@ -44,7 +44,8 @@ namespace Retronia.Scenes.Lobby
           
           for (var i = activeBars.Length; i < inventorySize; i++)
           {
-            newBars[i] = Instantiate(originBar, inventoryContainer).GetComponent<UIItemSlotBar>();
+            newBars[i] = Instantiate(originBar, inventoryContainer)
+              .GetComponent<UIItemSlotBar>();
           }
           
           activeBars = newBars;
@@ -56,7 +57,8 @@ namespace Retronia.Scenes.Lobby
         activeBars = new UIItemSlotBar[inventorySize];
         for (var i = 0; i < activeBars.Length; i++)
         {
-          activeBars[i] = Instantiate(originBar, inventoryContainer).GetComponent<UIItemSlotBar>();
+          activeBars[i] = Instantiate(originBar, inventoryContainer)
+            .GetComponent<UIItemSlotBar>();
         }
       }
       

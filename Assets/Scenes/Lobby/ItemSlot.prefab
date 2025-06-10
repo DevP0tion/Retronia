@@ -219,7 +219,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5440409966512045071}
-  - component: {fileID: 1599118548918060566}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -251,28 +250,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1599118548918060566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401488074988962108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80227f903c9747f7b5848a3d490bca98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stack:
-    type: {fileID: 0}
-    onAmountChange:
-      m_PersistentCalls:
-        m_Calls: []
-    amount: 0
-  background: {fileID: 4846752051218229976}
-  item: {fileID: 5773010935223441124}
-  border: {fileID: 956719175877033320}
-  amountText: {fileID: 4271145651575720932}
 --- !u!1 &6529471704582367265
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +545,7 @@ GameObject:
   - component: {fileID: 9006477660684449819}
   - component: {fileID: 8516365962831057980}
   - component: {fileID: 2329097327307751196}
+  - component: {fileID: 5117091377792512328}
   m_Layer: 5
   m_Name: ColliderImage
   m_TagString: Untagged
@@ -632,3 +610,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5117091377792512328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289980066605040393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80227f903c9747f7b5848a3d490bca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stack:
+    type: {fileID: 0}
+    onAmountChange:
+      m_PersistentCalls:
+        m_Calls: []
+    amount: 0
+  background: {fileID: 4846752051218229976}
+  item: {fileID: 5773010935223441124}
+  border: {fileID: 956719175877033320}
+  amountText: {fileID: 4271145651575720932}
