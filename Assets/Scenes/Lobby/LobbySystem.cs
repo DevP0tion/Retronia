@@ -1,10 +1,11 @@
+using Retronia.Contents.Properties;
 using Retronia.IO;
 using Retronia.Scenes.Lobby.Panels;
 using Retronia.Utils;
 using Retronia.Utils.UI;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 using CharacterInfo = Retronia.IO.Formats.CharacterInfo;
 
 namespace Retronia.Scenes.Lobby
@@ -14,6 +15,7 @@ namespace Retronia.Scenes.Lobby
     private static SAVE Data => SAVE.Current;
     private static CharacterInfo PlayerData => CharacterInfo.Current;
     public static LobbySystem Instance { get; private set; }
+    public UIItemSlot focusedSlot;
     
     #region Binding
     [Header( "Binding" )]
@@ -101,6 +103,21 @@ namespace Retronia.Scenes.Lobby
       InitMenu();
       InitStatus();
       InitInventory();
+    }
+    
+    #endregion
+    
+    #region Input Action
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+      if (context.ReadValue<float>() == 0)
+      {
+        var itemStack = focusedSlot?.Stack;
+        if (itemStack is { type: IEquipable equipable })
+        {
+        }
+      }
     }
     
     #endregion

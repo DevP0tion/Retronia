@@ -46,6 +46,7 @@ namespace Retronia.Scenes.Lobby
     public void OnPointerEnter(PointerEventData eventData)
     {
       border.color = new Color(1f, 0.5f, 0f);
+      LobbySystem.Instance.focusedSlot = this;
       
       if (stack == null || !stack.type) return;
       Lobby.itemDescriptionPanel.Item = stack?.type;
@@ -63,6 +64,7 @@ namespace Retronia.Scenes.Lobby
     public void OnPointerExit(PointerEventData eventData)
     {
       border.color = Color.white;
+      LobbySystem.Instance.focusedSlot = null;
 
       if (stack == null || !stack.type) return;
       Lobby.itemDescriptionPanel.gameObject.SetActive(false);
