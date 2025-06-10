@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eec9a68c5524f0ca11e8bf97c7de047, type: 3}
   m_Name: Alpha
   m_EditorClassIdentifier: 
-  allowedPart: 
+  allowedPart: 000000000100000002000000
