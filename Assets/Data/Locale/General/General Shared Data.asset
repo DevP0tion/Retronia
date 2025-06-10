@@ -95,6 +95,10 @@ MonoBehaviour:
     m_Key: Item_Meteorite_description
     m_Metadata:
       m_Items: []
+  - m_Id: 5528979610501120
+    m_Key: Global_blank
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
