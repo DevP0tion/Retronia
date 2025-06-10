@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using Retronia.IO.Formats;
 using UnityEngine;
 using UnityEngine.Serialization;
-using CharacterInfo = Retronia.IO.Formats.CharacterInfo;
 
 namespace Retronia.IO
 {
@@ -24,7 +23,7 @@ namespace Retronia.IO
     
     #region Modules
     
-    public CharacterInfo player = null;
+    public PlayerInfo player = null;
     
     #endregion
     

@@ -1,5 +1,6 @@
 using Retronia.Contents.Properties;
 using Retronia.IO;
+using Retronia.IO.Formats;
 using Retronia.Scenes.Lobby.Panels;
 using Retronia.Utils;
 using Retronia.Utils.UI;
@@ -13,15 +14,18 @@ namespace Retronia.Scenes.Lobby
   public class LobbySystem : MonoBehaviour
   {
     private static SAVE Data => SAVE.Current;
-    private static CharacterInfo PlayerData => CharacterInfo.Current;
+    
+    private static PlayerInfo Player => PlayerInfo.Current;
+    private static CharacterInfo Character => Player.SelectedCharacter;
     public static LobbySystem Instance { get; private set; }
-    public UIItemSlot focusedSlot;
+    
     
     #region Binding
     [Header( "Binding" )]
     
     [SerializeField] private CharacterView characterView;
     public ItemDescriptionPanel itemDescriptionPanel;
+    public UIItemSlot focusedSlot;
     
     #endregion
 
@@ -43,16 +47,16 @@ namespace Retronia.Scenes.Lobby
 
     private void InitMenu()
     {
-      if (PlayerData != null)
+      if (Character != null)
       {
-        elementalText.text = "속성 - " + PlayerData.elemental;
-        nameText.text = PlayerData.name;
-        levelText.text = PlayerData.level.ToString();
-        goldText.text = $"{PlayerData.gold:#,###}";
+        elementalText.text = "속성 - " + Character.elemental;
+        nameText.text = Character.name;
+        levelText.text = Character.level.ToString();
+        goldText.text = $"{Player.gold:#,###}";
         
-        expBar.max = PlayerData.MaxExp;
-        expBar.Value = PlayerData.exp;
-        expText.text = PlayerData.exp + " / " + PlayerData.MaxExp;
+        expBar.max = Character.MaxExp;
+        expBar.Value = Character.Exp;
+        expText.text = Character.Exp + " / " + Character.MaxExp;
       }
     }
     #endregion
@@ -65,10 +69,10 @@ namespace Retronia.Scenes.Lobby
     
     private void InitStatus()
     {
-      atkText.text = PlayerData.status["atk"].ToString();
-      defText.text = PlayerData.status["def"].ToString();
-      hpText.text = PlayerData.status["hp"].ToString();
-      critChanceText.text = PlayerData.status["critChance"].ToString();
+      atkText.text = Character.atk.ToString();
+      defText.text = Character.def.ToString();
+      hpText.text = Character.hp.ToString();
+      critChanceText.text = Character.critChance.ToString();
     }
     #endregion
     

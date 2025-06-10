@@ -13,7 +13,7 @@ namespace Retronia.IO.Formats
   [Serializable]
   public class Inventory : IJsonSerializable, IList<ItemStack>
   {
-    public static Inventory Current => CharacterInfo.Current.inventory;
+    public static Inventory Current => PlayerInfo.Current.inventory;
     
     [SerializeField] protected ItemStack[] items = new ItemStack[10];
 

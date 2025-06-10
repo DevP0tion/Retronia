@@ -1,22 +1,30 @@
 using System;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Retronia.Contents;
+using Retronia.Utils;
+using UnityEngine;
 
 namespace Retronia.IO.Formats
 {
   [Serializable]
   public class CharacterInfo : IJsonSerializable
   {
-    public static CharacterInfo Current => SAVE.Current?.player;
+    #region Status
     
     public string name = "Alpha";
     public Elemental elemental = Elemental.Normal;
     public int level = 1;
-    public int exp = 0;
-    public int gold = 1000;
-    public Inventory inventory = new();
+    [SerializeField, GetSet(nameof(Exp))] private int exp = 0;
 
+    public RangedStat hp = new(100);
+    public Stat atk = new(35);
+    public Stat def = new(40);
+    public Stat critChance = new(25);
+    
+    #endregion
+    
+    #region Logic
+    
     /// <summary>
     /// 10렙마다 요구량 크게 증가, 그 외에는 조금씩 증가
     /// </summary>
@@ -29,39 +37,39 @@ namespace Retronia.IO.Formats
       }
     }
 
-    public readonly Dictionary<string, int> status = new()
+    public int Exp
     {
-      ["hp"] = 100,
-      ["atk"] = 35,
-      ["def"] = 40,
-      ["critChance"] = 25,
-    };
-
+      get => exp;
+      set
+      {
+        exp = value;
+        while (exp >= MaxExp)
+        {
+          exp -= MaxExp;
+          level++;
+        }
+      }
+    }
+    
+    #endregion
+    
     public CharacterInfo(JObject json = null)
     {
       if(json != null)
         LoadJson(json);
     }
-
+    
     public void LoadJson(JObject json)
     {
-      name = json.TryGetValue(nameof(name), out var token) ? token.Value<string>() : name;
-      level = json.TryGetValue(nameof(level), out token) ? token.Value<int>() : level;
-      exp = json.TryGetValue(nameof(exp), out token) ? token.Value<int>() : exp;
-      gold = json.TryGetValue(nameof(gold), out token) ? token.Value<int>() : gold;
-      elemental = json.TryGetValue(nameof(elemental), out token) ? token.ToEnum(elemental) : elemental;
-
-      if (json.TryGetValue(nameof(status), out token) && token is JObject dic)
-      {
-        foreach (var (key, value) in dic)
-        {
-          if (value is not null)
-            status[key] = value.Value<int>();
-        }
-      }
-      
-      if(json.TryGetValue(nameof(inventory), out token) && token is JObject inventoryJson)
-        inventory.LoadJson(inventoryJson);
+      name = json.Get("name", "Alpha");
+      level = json.Get("level", 1);
+      exp = json.Get("exp", 0);
+      hp.Max.BaseValue = json.Get("max" + nameof(hp), 100);
+      hp.Value = json.Get(nameof(hp), 100);
+      atk.BaseValue = json.Get(nameof(atk), 35);
+      def.BaseValue = json.Get(nameof(def), 40);
+      critChance.BaseValue = json.Get(nameof(critChance), 25);
+      elemental = json.Get(nameof(elemental), Elemental.Normal);
     }
 
     public JObject ToJson()
@@ -69,12 +77,14 @@ namespace Retronia.IO.Formats
       return new JObject
       {
         [nameof(name)] = name,
+        ["max" + nameof(hp)] = hp.Max.BaseValue,
+        [nameof(hp)] = hp.Value,
+        [nameof(atk)] = atk.Value,
+        [nameof(def)] = def.Value,
+        [nameof(critChance)] = critChance.Value,
         [nameof(level)] = level,
         [nameof(exp)] = exp,
-        [nameof(gold)] = gold,
-        [nameof(elemental)] = elemental.ToToken(),
-        [nameof(status)] = status.DicToJObject(),
-        [nameof(inventory)] = inventory.ToJson()
+        [nameof(elemental)] = elemental.ToToken()
       };
     }
   }

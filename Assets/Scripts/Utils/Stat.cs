@@ -31,17 +31,11 @@ namespace Retronia.Utils
     }
 
     public virtual float Value => effect?.Invoke(baseValue) ?? baseValue;
+    
+    public override string ToString() => Value.ToString("F1");
 
-    public static implicit operator float(Stat stat)
-    {
-      return stat.Value;
-    }
-
-    public static implicit operator Stat(float value)
-    {
-      return new Stat(value);
-    }
-
+    public static implicit operator float(Stat stat) => stat.Value;
+    public static implicit operator Stat(float value) => new Stat(value);
     #region Operators
 
     public static Stat operator +(Stat stat, float value)

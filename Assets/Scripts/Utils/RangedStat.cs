@@ -38,7 +38,7 @@ namespace Retronia.Utils
       }
     }
 
-    public float Max
+    public Stat Max
     {
       get => max;
       set

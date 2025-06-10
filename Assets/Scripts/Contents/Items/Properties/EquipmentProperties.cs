@@ -5,8 +5,16 @@ namespace Retronia.Contents.Properties
   [CreateAssetMenu(fileName = "new Equipment Properties", menuName = "Properties/Equipment Item")]
   public class EquipmentProperties : ItemProperties, IEquipable
   {
+    public EquipmentPart part;
     public void Equip()
     {
     }
+  }
+
+  public enum EquipmentPart
+  {
+    Weapon,
+    Core,
+    Engine
   }
 }
