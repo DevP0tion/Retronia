@@ -22,14 +22,13 @@ namespace Retronia.Scenes.Lobby.Panels
       set
       {
         item = value;
-        if (item != null)
-        {
-          nameString.StringReference = new LocalizedString("General", "");
-        }
-        else
-        {
-          
-        }
+        nameString.StringReference = item != null ? 
+          new LocalizedString("General", $"Item_{value.name}_name") :
+          new LocalizedString("General", "Global_blank");
+        
+        descriptionString.StringReference = item != null ? 
+          new LocalizedString("General", $"Item_{value.name}_description") :
+          new LocalizedString("General", "Global_blank");
       }
     }
   }
