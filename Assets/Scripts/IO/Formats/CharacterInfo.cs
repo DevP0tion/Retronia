@@ -60,8 +60,14 @@ namespace Retronia.IO.Formats
     #endregion
 
     #region Equipment
+    public List<StatOperator<float>> 
+      hpEffect = new(),
+      atkEffect = new(),
+      defEffect = new(),
+      critChanceEffect = new();
 
     private Dictionary<EquipmentPart, IEquipable> equipments = new();
+    private Dictionary<EquipmentPart, Action> unEquipActions = new();
 
     public bool Equip(IEquipable equipment)
     {
@@ -69,9 +75,12 @@ namespace Retronia.IO.Formats
 
       if (Scheme.allowedPart.Contains(equipment.Part))
       {
-        equipments.TryAdd(equipment.Part, equipment);
-        equipment.Equip(this);
-        return true;
+        if (equipments.TryAdd(equipment.Part, equipment))
+        {
+          unEquipActions[equipment.Part] = equipment.Equip(this);
+          
+          return true;
+        }
       }
       
       return false;
@@ -81,7 +90,12 @@ namespace Retronia.IO.Formats
     {
       if (equipments.Remove(part, out var equipment))
       {
-        equipment.Unequip(this);
+        equipment.UnEquip(this);
+        if (unEquipActions.TryGetValue(part, out var action))
+        {
+          action();
+          unEquipActions.Remove(part);
+        }
       }
     }
     
@@ -100,6 +114,11 @@ namespace Retronia.IO.Formats
     
     public CharacterInfo(JObject json = null)
     {
+      hp.MaxEffect = v => hpEffect.Aggregate(v, (current, effect) => effect(current));
+      atk.effect = v => atkEffect.Aggregate(v, (current, effect) => effect(current));
+      def.effect = v => defEffect.Aggregate(v, (current, effect) => effect(current));
+      critChance.effect = v => critChanceEffect.Aggregate(v, (current, effect) => effect(current));
+      
       if(json != null)
         LoadJson(json);
     }

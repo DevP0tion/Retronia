@@ -1,3 +1,4 @@
+using System;
 using Retronia.Contents.Items;
 using Retronia.IO.Formats;
 
@@ -7,7 +8,7 @@ namespace Retronia.Contents.Properties
   {
     EquipmentPart Part { get; }
     string Name { get; }
-    void Equip(CharacterInfo character);
-    void Unequip(CharacterInfo character);
+    Action Equip(CharacterInfo character);
+    void UnEquip(CharacterInfo character);
   }
 }
