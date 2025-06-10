@@ -44,17 +44,14 @@ namespace Retronia.Core
     
     public static string Localize(this string key, params string[] args)
     {
-      var entryKey = generalTableData.GetEntry(key);
       if (generalTables.TryGetValue(ActiveLocale.Identifier, out var table))
       {
-        var id = generalTableData.GetId(key);
-        if(table.TryGetValue(id, out var entry)) return entry.Value;
+        if(table.TryGetValue(generalTableData.GetEntry(string.Join("_", args) + "_" + key).Id, out var entry)) return entry.Value;
       }
       
       return $"unknown key - {key}";
     }
     
-    public static string LocalizeWithScene(this string key) => Localize(SceneManager.GetActiveScene().name + "_" + key);
-    
+    public static string LocalizeWithScene(this string key, params string[] args) => Localize(key, SceneManager.GetActiveScene().name);
   }
 }
