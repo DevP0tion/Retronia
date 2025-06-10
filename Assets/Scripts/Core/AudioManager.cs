@@ -176,25 +176,36 @@ namespace Retronia.Core
       source.Play();
     }
 
-    public static void Play(AudioClip clip, SoundType type = SoundType.Effect)
+    public static void Play(AudioClip clip, AudioType type = AudioType.Effect)
     {
       if(!Mixer) return;
       
       AudioSource source = type switch
       {
-        SoundType.Background => BackgroundSource,
-        SoundType.Effect => EffectSource,
+        AudioType.Background => BackgroundSource,
+        AudioType.Effect => EffectSource,
         _ => EffectSource
       };
       
       source.clip = clip;
-      source.outputAudioMixerGroup = type == SoundType.Background ? backgroundGroup : effectGroup;
+      source.outputAudioMixerGroup = type == AudioType.Background ? backgroundGroup : effectGroup;
       source.Play();
     }
 
-    /// <summary>
-    /// 기술 문제로 인한 동기 로더 구현 
-    /// </summary>
+    public static void Stop(AudioType type = AudioType.Background)
+    {
+      if(!Mixer) return;
+      
+      var source = type switch
+      {
+        AudioType.Background => BackgroundSource,
+        AudioType.Effect => EffectSource,
+        _ => EffectSource
+      };
+      
+      source.Stop();
+    }
+    
     public static AsyncOperationHandle Load()
     {
       if(Loaded) throw new InvalidOperationException("SoundManager is already loaded.");
@@ -211,7 +222,7 @@ namespace Retronia.Core
     }
   }
 
-  public enum SoundType
+  public enum AudioType
   {
     Background,
     Effect
