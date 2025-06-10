@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Retronia.Contents.Properties
 {
-  [CreateAssetMenu(fileName = "new Bullet Properties", menuName = "Retronia/Bullet Properties")]
+  [CreateAssetMenu(fileName = "new Bullet Properties", menuName = "Properties/Bullet Properties")]
   public class BulletProperties : ScriptableObject
   {
     /// <summary>

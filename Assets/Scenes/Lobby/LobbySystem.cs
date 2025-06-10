@@ -50,7 +50,7 @@ namespace Retronia.Scenes.Lobby
       if (Character != null)
       {
         elementalText.text = "속성 - " + Character.elemental;
-        nameText.text = Character.name;
+        nameText.text = Character.Name;
         levelText.text = Character.level.ToString();
         goldText.text = $"{Player.gold:#,###}";
         
@@ -120,6 +120,7 @@ namespace Retronia.Scenes.Lobby
         var itemStack = focusedSlot?.Stack;
         if (itemStack is { type: IEquipable equipable })
         {
+          
         }
       }
     }

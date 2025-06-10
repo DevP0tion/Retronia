@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Retronia.Contents;
+using Retronia.Contents.Items;
+using Retronia.Contents.Properties;
 using Retronia.Utils;
 using UnityEngine;
 
@@ -9,9 +13,11 @@ namespace Retronia.IO.Formats
   [Serializable]
   public class CharacterInfo : IJsonSerializable
   {
+    public CharacterProperties Scheme { get; private set; } = null;
+    public string Name => Scheme?.name;
+    
     #region Status
     
-    public string name = "Alpha";
     public Elemental elemental = Elemental.Normal;
     public int level = 1;
     [SerializeField, GetSet(nameof(Exp))] private int exp = 0;
@@ -52,6 +58,42 @@ namespace Retronia.IO.Formats
     }
     
     #endregion
+
+    #region Equipment
+
+    private Dictionary<EquipmentPart, IEquipable> equipments = new();
+
+    public void Equip(IEquipable equipment)
+    {
+      if (equipment == null || !Scheme) return;
+
+      if (Scheme.allowedPart.Contains(equipment.Part))
+      {
+        equipments.TryAdd(equipment.Part, equipment);
+        equipment.Equip(this);
+      }
+    }
+
+    public void UnEquip(EquipmentPart part)
+    {
+      if (equipments.Remove(part, out var equipment))
+      {
+        equipment.Unequip(this);
+      }
+    }
+    
+    public IEquipable this[EquipmentPart part]
+    {
+      get => equipments[part];
+      set
+      {
+        if (value == null)
+          UnEquip(part);
+        else
+          Equip(value);
+      }
+    }
+    #endregion
     
     public CharacterInfo(JObject json = null)
     {
@@ -59,9 +101,13 @@ namespace Retronia.IO.Formats
         LoadJson(json);
     }
     
+    public CharacterInfo(CharacterProperties scheme, JObject json = null) : this(json)
+    {
+      this.Scheme = scheme;
+    }
+    
     public void LoadJson(JObject json)
     {
-      name = json.Get("name", "Alpha");
       level = json.Get("level", 1);
       exp = json.Get("exp", 0);
       hp.Max.BaseValue = json.Get("max" + nameof(hp), 100);
@@ -70,13 +116,27 @@ namespace Retronia.IO.Formats
       def.BaseValue = json.Get(nameof(def), 40);
       critChance.BaseValue = json.Get(nameof(critChance), 25);
       elemental = json.Get(nameof(elemental), Elemental.Normal);
+      Scheme = CharacterProperties.Characters[json.Get(nameof(Scheme), "Alpha")];
+
+      if (json.TryGetValue(nameof(equipments), out var equipmentsToken) && equipmentsToken is JArray jArray)
+      {
+        foreach (var token in jArray)
+        {
+          if (ItemProperties.items.TryGetValue(token.Value<string>(), out var item))
+          {
+            if (item is IEquipable equipable)
+              Equip(equipable);
+            else
+              Debug.LogWarning($"Item {item.name} is not equipable.");
+          }
+        }
+      }
     }
 
     public JObject ToJson()
     {
       return new JObject
       {
-        [nameof(name)] = name,
         ["max" + nameof(hp)] = hp.Max.BaseValue,
         [nameof(hp)] = hp.Value,
         [nameof(atk)] = atk.Value,
@@ -84,7 +144,9 @@ namespace Retronia.IO.Formats
         [nameof(critChance)] = critChance.Value,
         [nameof(level)] = level,
         [nameof(exp)] = exp,
-        [nameof(elemental)] = elemental.ToToken()
+        [nameof(elemental)] = elemental.ToToken(),
+        [nameof(Scheme)] = Scheme.name,
+        [nameof(equipments)] = new JArray(from pair in equipments select pair.Value.Name)
       };
     }
   }

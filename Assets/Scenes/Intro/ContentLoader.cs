@@ -35,7 +35,14 @@ namespace Retronia.Scenes.Intro
       var (sharedTableLoader, stringTableLoader) = Localizer.Load();
       GameManager.Instance.Load();
 
-      var loader = new [] { sharedTableLoader, stringTableLoader, ItemProperties.Load(), AudioManager.Load() };
+      var loader = new []
+      {
+        sharedTableLoader, 
+        stringTableLoader,
+        ItemProperties.Load(),
+        AudioManager.Load(),
+        CharacterProperties.Load()
+      };
 
       foreach (var operation in loader)
       {

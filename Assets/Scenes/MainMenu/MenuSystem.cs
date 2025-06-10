@@ -26,7 +26,7 @@ namespace Retronia.Scenes.MainMenu
       newData.Init();
       newData.player.inventory.AddItem("Gem", 10);
       newData.player.inventory.AddItem("Meteorite", 2);
-      newData.player.AddCharacter(new());
+      newData.player.AddCharacter("Alpha");
       SceneManager.LoadScene(SceneNames.Lobby);
     }
     

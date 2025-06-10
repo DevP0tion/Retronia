@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Retronia.Contents.Properties
 {
-  [CreateAssetMenu(fileName = "new Entity Properties", menuName = "Retronia/Entity Properties")]
+  [CreateAssetMenu(fileName = "new Entity Properties", menuName = "Properties/Entity Properties")]
   public class EntityProperties : ScriptableObject
   {
     public float speed = 1;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Retronia.Contents.Properties;
 using Retronia.Utils;
 using UnityEngine;
 
@@ -36,7 +37,16 @@ namespace Retronia.IO.Formats
       }
     }
     public CharacterInfo SelectedCharacter => characters[selectedCharacterIndex];
-    public void AddCharacter(CharacterInfo character) => characters.Add(character);
+    public void AddCharacter(CharacterProperties properties) => characters.Add(properties.Instantiate());
+    public void AddCharacter(string characterName) => AddCharacter(CharacterProperties.Characters[characterName]);
+
+    public void RemoveCharacter(int index)
+    {
+      if (index < 0 || index >= characters.Count)
+        throw new ArgumentOutOfRangeException(nameof(index));
+        
+      characters.RemoveAt(index);
+    }
     public CharacterInfo this[int index] => characters[index];
     
     #endregion
