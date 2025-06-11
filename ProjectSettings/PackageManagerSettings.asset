@@ -74,7 +74,15 @@ MonoBehaviour:
     m_IsDefault: 0
     m_Capabilities: 0
     m_ConfigSource: 4
-  m_UserSelectedRegistryName: NaughtyAttributes
+  - m_Id: scoped:project:backndworld
+    m_Name: backndworld
+    m_Url: https://registry.npmjs.org
+    m_Scopes:
+    - com.backnd.world
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  m_UserSelectedRegistryName: backndworld
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0

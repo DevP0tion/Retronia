@@ -33,7 +33,7 @@ namespace Retronia.Scenes.MainMenu
       newData.player.inventory.AddItem("Core", 1);
       newData.player.inventory.AddItem("Engine", 1);
       newData.player.AddCharacter("Alpha");
-      SceneManager.LoadScene(SceneNames.Lobby);
+      SceneManager.LoadScene(SceneNames.BeforeJoin);
     }
     
     #endregion

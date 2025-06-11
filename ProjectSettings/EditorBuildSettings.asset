@@ -15,11 +15,17 @@ EditorBuildSettings:
     path: Assets/Scenes/World/World.unity
     guid: e60eb1e11120aa24bbd97f40b4070c67
   - enabled: 1
-    path: Assets/Scenes/Multiplayer/Multiplayer.unity
-    guid: 97a2fecfea3a9704fb8168b605dfc366
-  - enabled: 1
     path: Assets/Scenes/Lobby/Lobby.unity
     guid: 03b282a47ed86eb41b1ca1bcf8553992
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/BeforeJoin.unity
+    guid: b743504c6dbd4ba45a4331c438097b1a
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/LobbyRoom.unity
+    guid: 97a2fecfea3a9704fb8168b605dfc366
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Multiplay.unity
+    guid: e62b37155164be04499557828541417c
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 9c4fe4a655cfaf0439b6e44756fef5d2, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: d3bbc12a31020c54db889317008d7e1c, type: 2}
