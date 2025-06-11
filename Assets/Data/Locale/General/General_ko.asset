@@ -130,6 +130,26 @@ MonoBehaviour:
     m_Localized: Cannnon
     m_Metadata:
       m_Items: []
+  - m_Id: 5900004688887808
+    m_Localized: "\uB9C8\uC2A4\uD130 \uBCFC\uB968"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5900343940972544
+    m_Localized: "\uBC30\uACBD \uBCFC\uB968"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5911961412272128
+    m_Localized: "\uD6A8\uACFC \uBCFC\uB968"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5919365373853696
+    m_Localized: "\uC624\uBE0C\uC81D\uD2B8 \uBCFC\uB968"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5920606573264896
+    m_Localized: "\uC804\uCCB4\uD654\uBA74"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

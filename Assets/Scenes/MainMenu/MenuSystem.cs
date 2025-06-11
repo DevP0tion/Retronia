@@ -1,8 +1,11 @@
+using System;
+using Retronia.Core;
 using Retronia.IO;
 using Retronia.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Retronia.Scenes.MainMenu
 {
@@ -17,7 +20,7 @@ namespace Retronia.Scenes.MainMenu
 #endif
     }
 
-    #region SingleSetupPanel
+    #region SingleSetup Canvas
 
     public void CreateSave(TMP_InputField nameLabel)
     {
@@ -33,6 +36,42 @@ namespace Retronia.Scenes.MainMenu
       SceneManager.LoadScene(SceneNames.Lobby);
     }
     
+    #endregion
+    
+    #region Setting Canvas
+    [Header( "Setting Canvas" )]
+    
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider backgroundVolumeSlider;
+    [SerializeField] private Slider effectVolumeSlider;
+    [SerializeField] private Slider objectVolumeSlider;
+
+    private void LoadSettingCanvas()
+    {
+      masterVolumeSlider.value = AudioManager.MasterVolume;
+      backgroundVolumeSlider.value = AudioManager.BackgroundVolume;
+      effectVolumeSlider.value = AudioManager.EffectVolume;
+      objectVolumeSlider.value = AudioManager.ObjectVolume;
+      
+      masterVolumeSlider.onValueChanged.AddListener(value => AudioManager.MasterVolume = value);
+      backgroundVolumeSlider.onValueChanged.AddListener(value => AudioManager.BackgroundVolume = value);
+      effectVolumeSlider.onValueChanged.AddListener(value => AudioManager.EffectVolume = value);
+      objectVolumeSlider.onValueChanged.AddListener(value => AudioManager.ObjectVolume = value);
+    }
+
+    public void ChangeFullScreen(bool toggle)
+    {
+      Screen.fullScreen = toggle;
+    }
+    #endregion
+    
+    #region Unity Event
+
+    private void Start()
+    {
+      LoadSettingCanvas();
+    }
+
     #endregion
   }
 }

@@ -127,6 +127,26 @@ MonoBehaviour:
     m_Key: Item_Cannon_description
     m_Metadata:
       m_Items: []
+  - m_Id: 5900004688887808
+    m_Key: Global_masterVolumeLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5900343940972544
+    m_Key: Global_backgroundVolumeLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5911961412272128
+    m_Key: Global_effectVolumeLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5919365373853696
+    m_Key: Global_objectVolumeLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5920606573264896
+    m_Key: Global_fullscreen
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
