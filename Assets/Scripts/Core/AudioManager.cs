@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 
 namespace Retronia.Core
 {
@@ -18,12 +19,29 @@ namespace Retronia.Core
     public const string Label = "Audio";
     public static readonly Dictionary<string, AudioClip> Clips = new();
 
-    private static AudioSource effectSource, backgroundSource;
+    private static Camera mainCamera;
+    private static AudioSource effectSource = null, backgroundSource = null;
     private static AudioMixerGroup effectGroup, backgroundGroup, objectGroup;
     
     static AudioManager()
     {
       Mixer = Addressables.LoadAssetAsync<AudioMixer>(new AssetLabelReference{labelString = Label}).WaitForCompletion();
+      InitScene();
+
+      SceneManager.activeSceneChanged += (_, _) =>
+      {
+        InitScene();
+      };
+    }
+
+    private static void InitScene()
+    {
+      mainCamera = Camera.main;
+      effectSource = null;
+      backgroundSource = null;
+        
+      EffectSource?.Stop();
+      BackgroundSource?.Stop();
     }
 
     #region Volumes
@@ -118,23 +136,19 @@ namespace Retronia.Core
     {
       get
       {
-        var cam = Camera.main;
-        if (cam == null) return null;
+        if (mainCamera == null) return null;
 
-        if (effectSource && effectSource.gameObject == cam.gameObject)
-        {
+        if (effectSource && effectSource.gameObject == mainCamera.gameObject)
           return effectSource;
-        }
         
-        AudioSource source = cam.GetComponents<AudioSource>().FirstOrDefault(s => s.outputAudioMixerGroup == effectGroup);
+        effectSource = mainCamera.GetComponents<AudioSource>().FirstOrDefault(s => s.outputAudioMixerGroup == effectGroup);
 
-        if(!source || source != effectSource)
-        {
-          source = effectSource = cam.gameObject.AddComponent<AudioSource>();
-          effectSource.outputAudioMixerGroup = effectGroup;
-        }
+        if (effectSource) return effectSource;
+        
+        effectSource = mainCamera.gameObject.AddComponent<AudioSource>();
+        effectSource.outputAudioMixerGroup = effectGroup;
 
-        return source;
+        return effectSource;
       }
     }
     
@@ -142,24 +156,20 @@ namespace Retronia.Core
     {
       get
       {
-        var cam = Camera.main;
-        if (!cam) return null;
+        if (!mainCamera) return null;
         
-        if (backgroundSource && backgroundSource.gameObject == cam.gameObject)
-        {
+        if (backgroundSource && backgroundSource.gameObject == mainCamera.gameObject)
           return backgroundSource;
-        }
         
-        AudioSource source = cam.GetComponents<AudioSource>().FirstOrDefault(s => s.outputAudioMixerGroup == backgroundGroup);
+        backgroundSource = mainCamera.GetComponents<AudioSource>().FirstOrDefault(s => s.outputAudioMixerGroup == backgroundGroup);
 
-        if(!source || source != backgroundSource)
-        {
-          source = backgroundSource = cam.gameObject.AddComponent<AudioSource>();
-          source.loop = true;
-          backgroundSource.outputAudioMixerGroup = backgroundGroup;
-        }
+        if (backgroundSource) return backgroundSource;
+        
+        backgroundSource = mainCamera.gameObject.AddComponent<AudioSource>();
+        backgroundSource.loop = true;
+        backgroundSource.outputAudioMixerGroup = backgroundGroup;
 
-        return source;
+        return backgroundSource;
       }
     }
 
