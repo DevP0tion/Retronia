@@ -16,9 +16,10 @@ namespace Retronia.Core
   {
     public static bool Loaded { get; private set; } = false;
     public const string Label = "Audio";
+    public static readonly Dictionary<string, AudioClip> Clips = new();
+
     private static AudioSource effectSource, backgroundSource;
     private static AudioMixerGroup effectGroup, backgroundGroup, objectGroup;
-    public static readonly Dictionary<string, AudioClip> Clips = new();
     
     static AudioManager()
     {
@@ -176,11 +177,21 @@ namespace Retronia.Core
       source.Play();
     }
 
+    public static void Play(string clipName, GameObject obj)
+    {
+      if(!Loaded) return;
+      
+      if(Clips.TryGetValue(clipName, out var clip)) Play(clip, obj);
+      #if UNITY_EDITOR
+      else Debug.LogWarning($"AudioClip {clipName} is not found.");
+      #endif
+    }
+
     public static void Play(AudioClip clip, AudioType type = AudioType.Effect)
     {
       if(!Mixer) return;
       
-      AudioSource source = type switch
+      var source = type switch
       {
         AudioType.Background => BackgroundSource,
         AudioType.Effect => EffectSource,
@@ -190,6 +201,16 @@ namespace Retronia.Core
       source.clip = clip;
       source.outputAudioMixerGroup = type == AudioType.Background ? backgroundGroup : effectGroup;
       source.Play();
+    }
+    
+    public static void Play(string clipName, AudioType type = AudioType.Effect)
+    {
+      if(!Loaded) return;
+      
+      if(Clips.TryGetValue(clipName, out var clip)) Play(clip, type);
+      #if UNITY_EDITOR
+      else Debug.LogWarning($"AudioClip {clipName} is not found.");
+      #endif
     }
 
     public static void Stop(AudioType type = AudioType.Background)
