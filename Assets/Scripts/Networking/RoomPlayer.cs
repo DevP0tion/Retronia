@@ -1,8 +1,9 @@
+using Mirror;
 using UnityEngine;
 
 namespace Retronia.Networking
 {
-  public class RoomPlayer : MonoBehaviour
+  public class RoomPlayer : NetworkRoomPlayer
   {
     
   }

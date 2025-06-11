@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Multiplayer/BeforeJoin.unity
+    guid: b743504c6dbd4ba45a4331c438097b1a
+  - enabled: 1
     path: Assets/Scenes/Intro/Intro.unity
     guid: eb67cbd317c89b2419b335b3ab57d5e8
   - enabled: 1
@@ -17,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lobby/Lobby.unity
     guid: 03b282a47ed86eb41b1ca1bcf8553992
-  - enabled: 1
-    path: Assets/Scenes/Multiplayer/BeforeJoin.unity
-    guid: b743504c6dbd4ba45a4331c438097b1a
   - enabled: 1
     path: Assets/Scenes/Multiplayer/LobbyRoom.unity
     guid: 97a2fecfea3a9704fb8168b605dfc366

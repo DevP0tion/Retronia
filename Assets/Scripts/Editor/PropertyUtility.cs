@@ -3,8 +3,6 @@ using System.Collections;
 using System.Reflection;
 using UnityEditor;
 
-namespace Retronia.Utils.Editor
-{
   /// <summary>
   ///   대충 Chatgpt한테서 긁어와서 정리한 코드에요
   ///   유니티 에디터에서 값을 긁어오거나 설정할 때 사용용도로 구현했어요
@@ -115,4 +113,3 @@ namespace Retronia.Utils.Editor
       if (list != null && index >= 0 && index < list.Count) list[index] = value;
     }
   }
-}

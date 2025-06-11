@@ -1,6 +1,8 @@
+using Mirror;
+
 namespace Retronia.Networking
 {
-  public class GamePlayer
+  public class GamePlayer : NetworkBehaviour
   {
     
   }
