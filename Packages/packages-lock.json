@@ -28,20 +28,6 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
-    "com.mirror.steamworks.net": {
-      "version": "https://github.com/Chykary/FizzySteamworks.git?path=/com.mirror.steamworks.net",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "257165926335adcebadfc741a07f1ee0ec04195a"
-    },
-    "com.rlabrecque.steamworks.net": {
-      "version": "2024.8.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://package.openupm.com"
-    },
     "com.unity.2d.animation": {
       "version": "9.1.1",
       "depth": 1,
