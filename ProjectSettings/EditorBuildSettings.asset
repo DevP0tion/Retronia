@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/World/World.unity
     guid: e60eb1e11120aa24bbd97f40b4070c67
   - enabled: 1
-    path: Assets/Scenes/Multiplayer/Join.unity
+    path: Assets/Scenes/Multiplayer/Multiplayer.unity
     guid: 97a2fecfea3a9704fb8168b605dfc366
   - enabled: 1
     path: Assets/Scenes/Lobby/Lobby.unity

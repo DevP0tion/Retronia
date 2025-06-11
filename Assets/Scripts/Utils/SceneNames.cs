@@ -5,7 +5,7 @@ namespace Retronia.Utils
     public const string Intro = "Intro";
     public const string MainMenu = "MainMenu";
     public const string Lobby = "Lobby";
-    public const string Join = "Join";
+    public const string Multiplayer = "Multiplayer";
     public const string World = "World";
   }
 }
