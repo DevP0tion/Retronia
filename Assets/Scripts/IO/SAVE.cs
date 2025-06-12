@@ -86,7 +86,7 @@ namespace Retronia.IO
         await Current.Save();
     }
     
-    public static async Task<SAVE> Load(string name)
+    public static async Task<SAVE> Load(string name, bool create = false)
     {
       var path = System.IO.Path.Combine(SavePath, name + ".json");
       if (Directory.Exists(SavePath) && File.Exists(path))
@@ -114,8 +114,21 @@ namespace Retronia.IO
           return result;
         }
       }
+      else if(create)
+      {
+        var save = new SAVE(name);
+        await save.Save();
+        return save;
+      }
       
       return null;
+    }
+
+    public static SAVE LoadSync(string name, bool create = false)
+    {
+      var task = Load(name, create);
+      task.Wait();
+      return task.Result;
     }
 
     public static FileInfo[] GetSaveNames()
@@ -128,6 +141,26 @@ namespace Retronia.IO
       }
       
       return result;
+    }
+
+    public static bool Exits(string name)
+    {
+      var path = System.IO.Path.Combine(SavePath, name + ".json");
+      return Directory.Exists(SavePath) && File.Exists(path);
+    }
+
+    public static bool TryGet(string name, out SAVE save)
+    {
+      save = null;
+      if (Exits(name))
+      {
+        var task = Load(name);
+        task.Wait();
+        save = task.Result;
+        return true;
+      }
+      
+      return false;
     }
     
     #endregion
