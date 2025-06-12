@@ -17,6 +17,8 @@ namespace Retronia.IO
   [Serializable]
   public class SAVE : JObject
   {
+    public const string Version = "1.0";
+    
     public readonly string name;
     [SerializeField] private bool initialized = false;
     public bool IsInitialized => initialized;
@@ -30,6 +32,7 @@ namespace Retronia.IO
     public SAVE(string name, bool isRoot = true)
     {
       this.name = name;
+      this[nameof(Version)] = Version;
     }
 
     public void Init()
@@ -63,6 +66,7 @@ namespace Retronia.IO
       Debug.Log($"Save as {path} Complete!");
 #endif
       writer.Close();
+      await jsonWriter.CloseAsync();
     }
 
     public void SaveSync()
@@ -94,7 +98,8 @@ namespace Retronia.IO
         var reader = new JsonTextReader(File.OpenText(path));
         var result = new SAVE(name);
 
-        if (await ReadFromAsync(reader) is JObject obj)
+        if (await ReadFromAsync(reader) is JObject obj
+            && obj.TryGetValue(nameof(Version), out var version) && version.Value<string>() == Version)
         {
           foreach (var (key, value) in obj)
           {
@@ -111,10 +116,14 @@ namespace Retronia.IO
             }
           }
           result.Init();
+          reader.Close();
+          
           return result;
         }
+        reader.Close();
       }
-      else if(create)
+      
+      if(create)
       {
         var save = new SAVE(name);
         await save.Save();
