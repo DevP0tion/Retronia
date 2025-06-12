@@ -65,11 +65,25 @@ namespace Retronia.Scenes.MainMenu
     }
     #endregion
     
+    #region Multiplayer Canvas
+    [Header( "Multiplayer Canvas" )]
+    
+    [SerializeField] private TMP_InputField roomNameField;
+    [SerializeField] private TMP_InputField roomAddressField;
+
+    private void LoadMultiPlayerCanvas()
+    {
+      
+    }
+    
+    #endregion
+    
     #region Unity Event
 
     private void Start()
     {
       LoadSettingCanvas();
+      LoadMultiPlayerCanvas();
     }
 
     #endregion

@@ -51,7 +51,7 @@ MonoBehaviour:
   editorAutoStart: 0
   sendRate: 60
   offlineScene: Assets/Scenes/Multiplayer/BeforeJoin.unity
-  onlineScene: Assets/Scenes/Multiplayer/LobbyRoom.unity
+  onlineScene: 
   offlineSceneLoadDelay: 0
   transport: {fileID: 3222757131391129927}
   networkAddress: localhost
@@ -81,7 +81,7 @@ MonoBehaviour:
   showRoomGUI: 1
   minPlayers: 1
   roomPlayerPrefab: {fileID: 8266479015740952511, guid: d8aea017c2ca4f043b5e49186dd674af, type: 3}
-  RoomScene: Assets/Scenes/Multiplayer/LobbyRoom.unity
+  RoomScene: 
   GameplayScene: Assets/Scenes/Multiplayer/Multiplay.unity
   _allPlayersReady: 0
   clientIndex: 0
