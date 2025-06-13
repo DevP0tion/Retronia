@@ -26,6 +26,7 @@ namespace Retronia.IO
     #region Modules
     
     public PlayerInfo player = null;
+    public ServerList serverList = null;
     
     #endregion
     
@@ -40,7 +41,8 @@ namespace Retronia.IO
       if(initialized) return;
       initialized = true;
 
-      if (player == null) player = new();
+      player ??= new();
+      serverList ??= new();
     }
     
     public async Task Save()
@@ -58,6 +60,7 @@ namespace Retronia.IO
       var writeData = new JObject(this)
       {
         [nameof(player)] = player.ToJson(),
+        [nameof(serverList)] = serverList.ToJson()
       };
 
       await writeData.WriteToAsync(jsonWriter);
@@ -110,6 +113,11 @@ namespace Retronia.IO
               case nameof(player):
                 result.player = new((JObject)value);
                 break;
+              
+              case nameof(serverList):
+                result.serverList = new((JObject)value);
+                break;
+              
               default:
                 result[key] = value;
                 break;
