@@ -25,7 +25,6 @@ namespace Retronia.Core
     
     static AudioManager()
     {
-      Mixer = Addressables.LoadAssetAsync<AudioMixer>(new AssetLabelReference{labelString = Label}).WaitForCompletion();
       InitScene();
 
       SceneManager.activeSceneChanged += (_, _) =>
@@ -74,12 +73,13 @@ namespace Retronia.Core
     /// </summary>
     public static float MasterVolume
     {
-      get => Mixer && Mixer.GetFloat("Master", out var value) ? value + 80 : PlayerPrefs.GetFloat("MasterVolume", 80);
+      get => PlayerPrefs.GetFloat("MasterVolume", 80);
       set
       {
         var input = Math.Max(0, Math.Min(100, value));
 
-        if(Mixer) Mixer.SetFloat("Master", input - 80);
+        if(EffectSource) EffectSource.volume = (input / 100) * (BackgroundVolume / 100);
+        if(BackgroundSource) BackgroundSource.volume = (input / 100) * (EffectVolume / 100);
         PlayerPrefs.SetFloat("MasterVolume", input);
       }
     }
@@ -90,12 +90,12 @@ namespace Retronia.Core
     /// </summary>
     public static float BackgroundVolume
     {
-      get => Mixer && Mixer.GetFloat("Background", out var value) ? value + 80 : PlayerPrefs.GetFloat("BackgroundVolume", 80);
+      get => PlayerPrefs.GetFloat("BackgroundVolume", 80);
       set
       {
         var input = Math.Max(0, Math.Min(100, value));
 
-        if(Mixer) Mixer.SetFloat("Background", input - 80);
+        if(BackgroundSource) BackgroundSource.volume = (input / 100) * (MasterVolume / 100);
         PlayerPrefs.SetFloat("BackgroundVolume", input);
       }
     }
@@ -106,12 +106,12 @@ namespace Retronia.Core
     /// </summary>
     public static float EffectVolume
     {
-      get => Mixer && Mixer.GetFloat("Effect", out var value) ? value + 80 : PlayerPrefs.GetFloat("EffectVolume", 80);
+      get => PlayerPrefs.GetFloat("EffectVolume", 80);
       set
       {
         var input = Math.Max(0, Math.Min(100, value));
-
-        if(Mixer) Mixer.SetFloat("Effect", input - 80);
+        
+        if(EffectSource) EffectSource.volume = (input / 100) * (MasterVolume / 100);
         PlayerPrefs.SetFloat("EffectVolume", input);
       }
     }
@@ -137,7 +137,7 @@ namespace Retronia.Core
       get
       {
         if (mainCamera == null) return null;
-
+        
         if (effectSource && effectSource.gameObject == mainCamera.gameObject)
           return effectSource;
         
@@ -147,6 +147,7 @@ namespace Retronia.Core
         
         effectSource = mainCamera.gameObject.AddComponent<AudioSource>();
         effectSource.outputAudioMixerGroup = effectGroup;
+        effectSource.volume = (EffectVolume / 100) * (MasterVolume / 100);
 
         return effectSource;
       }
@@ -168,6 +169,7 @@ namespace Retronia.Core
         backgroundSource = mainCamera.gameObject.AddComponent<AudioSource>();
         backgroundSource.loop = true;
         backgroundSource.outputAudioMixerGroup = backgroundGroup;
+        backgroundSource.volume = (BackgroundVolume / 100) * (MasterVolume / 100);
 
         return backgroundSource;
       }
@@ -175,6 +177,8 @@ namespace Retronia.Core
 
     #endregion
 
+    #region Controller
+    
     public static void Play(AudioClip clip, GameObject obj)
     {
       if(!Mixer) return;
@@ -237,12 +241,18 @@ namespace Retronia.Core
       source.Stop();
     }
     
-    public static AsyncOperationHandle Load()
+    #endregion
+    
+    public static (AsyncOperationHandle mixerHandle, AsyncOperationHandle clipHandle) Load()
     {
       if(Loaded) throw new InvalidOperationException("SoundManager is already loaded.");
       Loaded = true;
+      
+      // Mixer = Addressables.LoadAssetAsync<AudioMixer>(new AssetLabelReference{labelString = Label}).WaitForCompletion();
+      var mixerHandle = Addressables.LoadAssetAsync<AudioMixer>(new AssetLabelReference{labelString = Label});
+      mixerHandle.Completed += handle => Mixer = handle.Result;
 
-      return Addressables.LoadAssetsAsync<AudioClip>(new AssetLabelReference { labelString = Label }, clip =>
+      var clipHandle = Addressables.LoadAssetsAsync<AudioClip>(new AssetLabelReference { labelString = Label }, clip =>
       {
         Clips[clip.name] = clip;
         
@@ -250,6 +260,8 @@ namespace Retronia.Core
         GameManager.Instance.loadedAudios[clip.name] = clip;
         #endif
       });
+      
+      return (mixerHandle, clipHandle);
     }
   }
 
