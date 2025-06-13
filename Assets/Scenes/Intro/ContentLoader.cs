@@ -69,8 +69,8 @@ namespace Retronia.Scenes.Intro
       {
         operation.loader.WaitForCompletion();
       }
-      
-      var saveData = SAVE.Current = new SAVE("default");
+
+      var saveData = SAVE.Current = SAVE.LoadSync("default", true);
       saveData.Init();
       saveData.player.inventory.AddItem("Gem", 10);
       saveData.player.inventory.AddItem("Meteorite", 2);
