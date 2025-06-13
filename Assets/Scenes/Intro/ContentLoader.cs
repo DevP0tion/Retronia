@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Retronia.Contents.Properties;
 using Retronia.Core;
 using Retronia.IO;
@@ -23,9 +24,9 @@ namespace Retronia.Scenes.Intro
     
     #region Unity Events
     
-    private void Start()
+    private async void Start()
     {
-      Load();
+      await Load();
       
       // 로딩이 완료됬을 시 게임을 시작할 수 있게 설정
       entryText.StringReference = new LocalizedString("General", "Intro_finished");
@@ -34,17 +35,20 @@ namespace Retronia.Scenes.Intro
     
     #endregion
 
-    public void Load()
+    public async Task Load()
     {
-      var (sharedTableLoader, stringTableLoader) = Localizer.Load();
+      var (sharedTableLoader, stringTableHandle) = Localizer.Load();
+      var (mixerHandle, clipHandle ) = AudioManager.Load();
       GameManager.Instance.Load();
+      var saveTask = SAVE.Load("default", true);
 
       var loaderList = new[]
       {
         (name:"Shared Table", loader: sharedTableLoader),
-        (name:"언어 번들", loader: stringTableLoader),
+        (name:"언어 번들", loader: stringTableHandle),
         (name:"아이템 정보", loader: ItemProperties.Load()),
-        (name:"음원", loader: AudioManager.Load()),
+        (name:"소리 설정", loader: mixerHandle),
+        (name:"음원", loader: clipHandle),
         (name:"캐릭터 정보", loader: CharacterProperties.Load())
       };
 
@@ -70,14 +74,15 @@ namespace Retronia.Scenes.Intro
         operation.loader.WaitForCompletion();
       }
 
-      var saveData = SAVE.Current = SAVE.LoadSync("default", true);
-      saveData.Init();
-      saveData.player.inventory.AddItem("Gem", 10);
-      saveData.player.inventory.AddItem("Meteorite", 2);
-      saveData.player.inventory.AddItem("Cannon", 1);
-      saveData.player.inventory.AddItem("Core", 1);
-      saveData.player.inventory.AddItem("Engine", 1);
-      saveData.player.AddCharacter("Alpha");
+      var saveData = SAVE.Current = await saveTask;
+      //
+      // saveData.Init();
+      // saveData.player.inventory.AddItem("Gem", 10);
+      // saveData.player.inventory.AddItem("Meteorite", 2);
+      // saveData.player.inventory.AddItem("Cannon", 1);
+      // saveData.player.inventory.AddItem("Core", 1);
+      // saveData.player.inventory.AddItem("Engine", 1);
+      // saveData.player.AddCharacter("Alpha");
       
       loadingText.gameObject.SetActive(false);
       entryButton.gameObject.SetActive(true);

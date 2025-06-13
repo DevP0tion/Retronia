@@ -68,8 +68,8 @@ namespace Retronia.IO
 #if UNITY_EDITOR
       Debug.Log($"Save as {path} Complete!");
 #endif
-      writer.Close();
       await jsonWriter.CloseAsync();
+      writer.Close();
     }
 
     public void SaveSync()
@@ -98,42 +98,55 @@ namespace Retronia.IO
       var path = System.IO.Path.Combine(SavePath, name + ".json");
       if (Directory.Exists(SavePath) && File.Exists(path))
       {
-        var reader = new JsonTextReader(File.OpenText(path));
-        var result = new SAVE(name);
-
-        if (await ReadFromAsync(reader) is JObject obj
-            && obj.TryGetValue(nameof(Version), out var version) && version.Value<string>() == Version)
+        try
         {
-          foreach (var (key, value) in obj)
-          {
-            if(value is null) continue;
+          var reader = new JsonTextReader(File.OpenText(path));
+          var result = new SAVE(name);
 
-            switch (key)
+          if (await ReadFromAsync(reader) is JObject obj
+              && obj.TryGetValue(nameof(Version), out var version) && version.Value<string>() == Version)
+          {
+            foreach (var (key, value) in obj)
             {
-              case nameof(player):
-                result.player = new((JObject)value);
-                break;
-              
-              case nameof(serverList):
-                result.serverList = new((JObject)value);
-                break;
-              
-              default:
-                result[key] = value;
-                break;
+              if (value is null) continue;
+
+              switch (key)
+              {
+                case nameof(player):
+                  result.player = new((JObject)value);
+                  break;
+
+                case nameof(serverList):
+                  result.serverList = new((JObject)value);
+                  break;
+
+                default:
+                  result[key] = value;
+                  break;
+              }
             }
+
+            result.Init();
+            reader.Close();
+
+            return result;
           }
-          result.Init();
+
           reader.Close();
-          
-          return result;
         }
-        reader.Close();
+        catch (JsonReaderException e)
+        {
+          #if UNITY_EDITOR
+          Debug.LogWarning($"Error while loading {path}.");
+          Debug.LogException(e);
+          #endif
+        }
       }
       
       if(create)
       {
         var save = new SAVE(name);
+        save.Init();
         await save.Save();
         return save;
       }
@@ -172,6 +185,7 @@ namespace Retronia.IO
       if (Exits(name))
       {
         var task = Load(name);
+        task.Start();
         task.Wait();
         save = task.Result;
         return true;
