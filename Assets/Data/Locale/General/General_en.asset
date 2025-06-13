@@ -150,6 +150,18 @@ MonoBehaviour:
     m_Localized: FullScreen
     m_Metadata:
       m_Items: []
+  - m_Id: 6779234368847872
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6781084677668864
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6781362210570240
+    m_Localized: Join
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -147,6 +147,18 @@ MonoBehaviour:
     m_Key: Global_fullscreen
     m_Metadata:
       m_Items: []
+  - m_Id: 6779234368847872
+    m_Key: Global_back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6781084677668864
+    m_Key: MainMenu_createRoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6781362210570240
+    m_Key: MainMenu_joinRoom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
