@@ -1,19 +1,21 @@
 using System.Collections.Generic;
+using Mirror;
 using Retronia.Contents.Properties;
+using Retronia.Scenes.World;
 using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Retronia.Contents
+namespace Retronia.Contents.Entities
 {
-  public class Entity : MonoBehaviour
+  public class Entity : NetworkBehaviour
   {
     #region State
 
-    [Header("Entity State")] [SerializeField] [GetSet(nameof(Data))]
-    protected EntityProperties data;
-
+    [Header("Entity State")] 
+    
+    [SerializeField] [GetSet(nameof(Data))] protected EntityProperties data;
     public Stat speed = 1;
     public Stat rotateSpeed = 8;
     public Vector2 direction = Vector2.up;
@@ -33,7 +35,7 @@ namespace Retronia.Contents
 
     #region Exports
 
-    public UnityEvent<Vector3> onOverflowMap;
+    public UnityEvent<Vector3> onOverflowMap = new();
     public Rigidbody2D Body => body;
 
     public virtual EntityProperties Data
@@ -66,13 +68,16 @@ namespace Retronia.Contents
 
     private void Awake()
     {
+      camera = Camera.main;
+
       onOverflowMap.AddListener(viewPos =>
       {
         // 맵 밖으로 나갔을 시 반대편으로 오게끔
-        transform.position = camera.ViewportToWorldPoint(new Vector3(
-          viewPos.x > 1 ? 0 : viewPos.x < 0 ? 1 : viewPos.x,
-          viewPos.y > 1 ? 0 : viewPos.y < 0 ? 1 : viewPos.y,
-          0)).Z(0);
+        if (camera != null)
+          transform.position = camera.ViewportToWorldPoint(new Vector3(
+            viewPos.x > 1 ? 0 : viewPos.x < 0 ? 1 : viewPos.x,
+            viewPos.y > 1 ? 0 : viewPos.y < 0 ? 1 : viewPos.y,
+            0)).Z(0);
       });
     }
 
@@ -88,7 +93,21 @@ namespace Retronia.Contents
     }
 
     #endregion
+    
+    #region Networking
 
+    public override void OnStartLocalPlayer()
+    {
+      base.OnStartLocalPlayer();
+      PlayerController.Instance.Entity = this;
+      if (!NetworkServer.active)
+      {
+        GetComponent<NetworkTransformUnreliable>().syncDirection = SyncDirection.ClientToServer;
+      }
+    }
+
+    #endregion
+    
     public void Shoot(Vector3 targetPosition)
     {
       foreach (var weapon in weapons)

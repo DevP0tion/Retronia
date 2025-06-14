@@ -1911,7 +1911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -613.02}
+  m_AnchoredPosition: {x: 600, y: -435}
   m_SizeDelta: {x: 677.72, y: 483.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234503879
@@ -5266,44 +5266,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 383452206652025062, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
       propertyPath: m_Name
-      value: RoomManager
+      value: NetworkManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: RoomScene
-      value: Assets/Scenes/MainMenu/Multi/LobbyRoom.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: onlineScene
-      value: Assets/Scenes/MainMenu/Multi/LobbyRoom.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: offlineScene
-      value: Assets/Scenes/MainMenu/MainMenu.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: GameplayScene
-      value: Assets/Scenes/MainMenu/Multi/Multiplay.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: authenticator
-      value: 
-      objectReference: {fileID: 652420649}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: playerSpawnMethod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: spawnPrefabs.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: spawnPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 5172395744777095973, guid: d8aea017c2ca4f043b5e49186dd674af, type: 3}
-    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      propertyPath: spawnPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 5172395744777095973, guid: d8aea017c2ca4f043b5e49186dd674af, type: 3}
     - target: {fileID: 6091751885642025177, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5347,38 +5311,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 383452206652025062, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 652420649}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
---- !u!1 &652420648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 383452206652025062, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
-  m_PrefabInstance: {fileID: 652420647}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &652420649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652420648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28496b776660156428f00cf78289c1ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnServerAuthenticated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientAuthenticated:
-    m_PersistentCalls:
-      m_Calls: []
-  serverUsername: Retronia
-  serverPassword: 
-  username: Retronia
-  password: 
 --- !u!1 &680942597
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6091751885642025177}
   - component: {fileID: 1448222988921329439}
   - component: {fileID: 3222757131391129927}
+  - component: {fileID: 230609096597800611}
   m_Layer: 0
-  m_Name: RoomManager
+  m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,16 +51,16 @@ MonoBehaviour:
   headlessStartMode: 1
   editorAutoStart: 0
   sendRate: 60
-  offlineScene: Assets/Scenes/Multiplayer/BeforeJoin.unity
-  onlineScene: 
+  offlineScene: Assets/Scenes/MainMenu/MainMenu.unity
+  onlineScene: Assets/Scenes/MainMenu/OnlineWorld.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 3222757131391129927}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 7100355293766329358, guid: 582c9e662ae7f4e41815748866bbaf16, type: 3}
+  authenticator: {fileID: 230609096597800611}
+  playerPrefab: {fileID: 7248170281234022327, guid: 930b2b91c2c194b40b92262769fc3ac9, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
@@ -77,14 +78,7 @@ MonoBehaviour:
     deliveryTimeEmaDuration: 2
   evaluationMethod: 0
   evaluationInterval: 3
-  timeInterpolationGui: 0
-  showRoomGUI: 1
-  minPlayers: 1
-  roomPlayerPrefab: {fileID: 8266479015740952511, guid: d8aea017c2ca4f043b5e49186dd674af, type: 3}
-  RoomScene: 
-  GameplayScene: Assets/Scenes/Multiplayer/Multiplay.unity
-  _allPlayersReady: 0
-  clientIndex: 0
+  timeInterpolationGui: 1
 --- !u!114 &3222757131391129927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +108,25 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
+--- !u!114 &230609096597800611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383452206652025062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28496b776660156428f00cf78289c1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnServerAuthenticated:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientAuthenticated:
+    m_PersistentCalls:
+      m_Calls: []
+  serverUsername: Retronia
+  serverPassword: 
+  username: Retronia
+  password: 

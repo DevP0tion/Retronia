@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;
 using Retronia.Utils;
 using Retronia.Worlds;

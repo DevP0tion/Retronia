@@ -1,15 +1,18 @@
 using NaughtyAttributes;
 using Retronia.Contents;
+using Retronia.Contents.Entities;
 using Retronia.Utils;
 using Retronia.Utils.UI;
 using Retronia.Worlds;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Retronia.Scenes.World
 {
-  public class Player : MonoBehaviour
+  public class PlayerController : MonoBehaviour
   {
+    public static PlayerController Instance { get; private set; }
     [Button]
     public void Test()
     {
@@ -51,6 +54,8 @@ namespace Retronia.Scenes.World
 
     private void Awake()
     {
+      if (Instance) Destroy(gameObject);
+      else Instance = this;
       // 엔티티가 미리 설정되어있을시 값 초기화용도
       if (entity) Entity = entity;
     }
@@ -81,6 +86,13 @@ namespace Retronia.Scenes.World
       }
     }
 
+    private void OnDestroy()
+    {
+      if (entity) entity.healthPoint.onChanged.RemoveListener(HealthHook);
+      entity = null;
+      Instance = null;
+    }
+
     #endregion
     
     #region Exports
@@ -90,14 +102,18 @@ namespace Retronia.Scenes.World
       get => entity;
       set
       {
+        if (entity) entity.healthPoint.onChanged.RemoveListener(HealthHook);
+        if (value) value.healthPoint.onChanged.AddListener(HealthHook);
         entity = value;
-        if (entity)
-          entity.healthPoint.onChanged.AddListener(_ =>
-          {
-            healthPointBar.max = entity.healthPoint.Max;
-            healthPointBar.Value = entity.healthPoint.Value;
-          });
       }
+    }
+
+    private void HealthHook(float _)
+    {
+      if(!entity) return;
+      
+      healthPointBar.max = entity.healthPoint.Max;
+      healthPointBar.Value = entity.healthPoint.Value;
     }
 
     #endregion

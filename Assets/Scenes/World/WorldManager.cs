@@ -8,7 +8,7 @@ namespace Retronia.Scenes.World
     public static WorldManager Instance { get; private set; }
 
     [SerializeField, GetSet(nameof(Pause))] private bool pause = false;
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerController player;
 
     public bool Pause
     {

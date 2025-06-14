@@ -72,9 +72,9 @@ namespace Retronia.Scenes.MainMenu
     
     #region Multiplayer Canvas
     [Header( "Multiplayer Canvas" )]
-    [SerializeField] private MultiplayerManager netManager;
-    [SerializeField] private BasicAuthenticator authenticator;
-    [SerializeField] private KcpTransport transport;
+    [SerializeField, ReadOnly] private MultiplayerManager netManager;
+    [SerializeField, ReadOnly] private BasicAuthenticator authenticator;
+    [SerializeField, ReadOnly] private KcpTransport transport;
     
     [SerializeField] private TMP_InputField createRoomPasswordField, createRoomPortField;
     [SerializeField] private TMP_InputField joinRoomAddressField, joinRoomPasswordField, joinRoomPortField;
