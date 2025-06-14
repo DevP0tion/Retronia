@@ -1,3 +1,4 @@
+using Mirror;
 using Retronia.Networking;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Retronia.Scenes.Multiplayer
   {
     public void CreateRoom(TMP_InputField field)
     {
-      var manager = RoomManager.singleton;
+      var manager = NetworkManager.singleton;
       manager.networkAddress = field.text;
       
       manager.StartHost();
@@ -16,7 +17,7 @@ namespace Retronia.Scenes.Multiplayer
 
     public void JoinRoom(TMP_InputField field)
     {
-      var manager = RoomManager.singleton;
+      var manager = NetworkManager.singleton;
       manager.networkAddress = field.text;
 
       

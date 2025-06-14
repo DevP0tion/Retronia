@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using Mirror;
+using Mirror.Authenticators;
 using Retronia.Core;
 using Retronia.IO;
 using Retronia.Utils;
@@ -66,14 +69,22 @@ namespace Retronia.Scenes.MainMenu
     #endregion
     
     #region Multiplayer Canvas
+    private static NetworkManager NetManager => NetworkManager.singleton;
+
     [Header( "Multiplayer Canvas" )]
     
-    [SerializeField] private TMP_InputField roomNameField;
-    [SerializeField] private TMP_InputField roomAddressField;
+    [SerializeField] private TMP_InputField createRoomNameField;
+    [SerializeField] private TMP_InputField createRoomAddressField;
+    [SerializeField] private TMP_InputField createRoomPortField;
+    
+    [SerializeField] private BasicAuthenticator authenticator;
 
     private void LoadMultiPlayerCanvas()
     {
-      
+    }
+
+    public void CreateRoom()
+    {
     }
     
     #endregion
