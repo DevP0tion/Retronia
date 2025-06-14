@@ -162,6 +162,22 @@ MonoBehaviour:
     m_Localized: Join
     m_Metadata:
       m_Items: []
+  - m_Id: 7086490817888256
+    m_Localized: Room Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7088109693403136
+    m_Localized: Port
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7092475011760128
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7102245638733824
+    m_Localized: Address
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

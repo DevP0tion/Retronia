@@ -159,6 +159,22 @@ MonoBehaviour:
     m_Key: MainMenu_joinRoom
     m_Metadata:
       m_Items: []
+  - m_Id: 7086490817888256
+    m_Key: Global_roomNameLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7088109693403136
+    m_Key: Global_serverPortLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7092475011760128
+    m_Key: Global_passwordLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7102245638733824
+    m_Key: Global_addressLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

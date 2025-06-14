@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using kcp2k;
 using Mirror;
 using Mirror.Authenticators;
 using Retronia.Core;
 using Retronia.IO;
+using Retronia.Networking;
 using Retronia.Utils;
 using TMPro;
 using UnityEngine;
@@ -69,22 +71,41 @@ namespace Retronia.Scenes.MainMenu
     #endregion
     
     #region Multiplayer Canvas
-    private static NetworkManager NetManager => NetworkManager.singleton;
-
     [Header( "Multiplayer Canvas" )]
-    
-    [SerializeField] private TMP_InputField createRoomNameField;
-    [SerializeField] private TMP_InputField createRoomAddressField;
-    [SerializeField] private TMP_InputField createRoomPortField;
-    
+    [SerializeField] private MultiplayerManager netManager;
     [SerializeField] private BasicAuthenticator authenticator;
+    [SerializeField] private KcpTransport transport;
+    
+    [SerializeField] private TMP_InputField createRoomPasswordField, createRoomPortField;
+    [SerializeField] private TMP_InputField joinRoomAddressField, joinRoomPasswordField, joinRoomPortField;
 
     private void LoadMultiPlayerCanvas()
     {
+      netManager = NetworkManager.singleton as MultiplayerManager;
+      authenticator = netManager?.authenticator as BasicAuthenticator;
+      transport = netManager?.transport as KcpTransport;
+      
+      createRoomPortField.onValueChanged.AddListener(text =>
+        createRoomPortField.text = (ushort.TryParse(text, out var port) ? Math.Max(Math.Min(port, ushort.MaxValue), 1024u) : 7777).ToString()
+        );
     }
 
     public void CreateRoom()
     {
+      netManager.networkAddress = "localhost";
+      authenticator.serverPassword = createRoomPasswordField.text;
+      transport.port = ushort.Parse(createRoomPortField.text);
+      
+      netManager.StartHost();
+    }
+
+    public void JoinRoom()
+    {
+      netManager.networkAddress = joinRoomAddressField.text;
+      authenticator.serverPassword = joinRoomPasswordField.text;
+      transport.port = ushort.Parse(createRoomPortField.text);
+
+      netManager.StartClient();
     }
     
     #endregion
