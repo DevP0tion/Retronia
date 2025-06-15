@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Retronia.Utils;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Retronia.Worlds
@@ -14,8 +16,8 @@ namespace Retronia.Worlds
     #region Fields
 
     [SerializeField] private Color color;
-    [SerializeField] private string name;
-    [SerializeField] private int id;
+    [SerializeField, ReadOnly] private string name;
+    [SerializeField, ReadOnly] private int id;
     
     public Color Color => color;
     public string Name => name;
@@ -41,6 +43,19 @@ namespace Retronia.Worlds
         this.color = ActiveTeams[index].color;
       }
     }
+
+    public static Team Get(string name)
+    {
+      var team = None;
+
+      foreach (var activeTeam in ActiveTeams.Where(activeTeam => activeTeam.name == name))
+      {
+        team = activeTeam;
+        break;
+      }
+      
+      return team;
+    }
     
     #region Operators
 
@@ -49,6 +64,8 @@ namespace Retronia.Worlds
     public bool Equals(Team other) => id == other.id;
     public override bool Equals(object obj) => obj is Team other && Equals(other);
     public override int GetHashCode() => id;
+    
+    public static implicit operator Team(string name) => Get(name);
     
     #endregion
 
