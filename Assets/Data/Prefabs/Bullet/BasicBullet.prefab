@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2181233182396210933}
   - component: {fileID: 3353225780480526656}
   - component: {fileID: 6041653527330169106}
+  - component: {fileID: 2334847316115864971}
   m_Layer: 7
   m_Name: BasicBullet
   m_TagString: Bullet
@@ -175,6 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4812998c834c53be501bbe1c20752f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   camera: {fileID: 0}
   properties: {fileID: 0}
   speed: 1
@@ -185,3 +189,20 @@ MonoBehaviour:
     id: 0
   direction: {x: 0, y: 0}
   body: {fileID: 3353225780480526656}
+--- !u!114 &2334847316115864971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836902350133391453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2320705816
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
