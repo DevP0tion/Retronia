@@ -23,8 +23,6 @@ namespace Retronia.Worlds
 
         instance = new GameObject("BulletManager").AddComponent<BulletManager>();
         instance.gameObject.AddComponent<NetworkIdentity>();
-        instance.released = new GameObject("Released").transform;
-        instance.released.transform.SetParent(instance.transform);
 
         return instance;
       }
@@ -77,7 +75,7 @@ namespace Retronia.Worlds
 
     public static void InitClientPool(NetworkConnectionToClient conn)
     {
-      NetworkServer.Spawn(instance.gameObject, conn);
+      NetworkServer.Spawn(Instance.gameObject, conn);
     }
 
     /// <summary>
@@ -111,13 +109,14 @@ namespace Retronia.Worlds
 
     #endregion
     
-    private void ShootFunc(BulletProperties properties, Vector3 startPos, Vector2 targetPosition, Team team, float damage)
+    private static void ShootFunc(BulletProperties properties, Vector3 startPos, Vector2 targetPosition, Team team, float damage)
     {
-      var bullet = pools[properties.bulletName].Get();
+      var bullet = Get(properties.bulletName);
+      bullet.Properties = properties;
       bullet.transform.position = startPos;
       bullet.team = team;
       bullet.transform.rotation = ((Vector2)bullet.transform.position).GetDirection(targetPosition);
-      bullet.direction = transform.rotation.ToVector2Direction();
+      bullet.direction = bullet.transform.rotation.ToVector2Direction();
       bullet.damage = damage;
     }
 
@@ -125,7 +124,7 @@ namespace Retronia.Worlds
     {
       if (NetworkServer.active)
       {
-        instance.ShootFunc(type, startPos, targetPos, team, damage);
+        ShootFunc(type, startPos, targetPos, team, damage);
         instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
       }
       else
@@ -145,7 +144,9 @@ namespace Retronia.Worlds
     [ClientRpc]
     private void ShootRpc(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
     {
-      instance.ShootFunc(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
+      if(NetworkServer.active) return;
+      
+      ShootFunc(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
     }
     
     #endregion
