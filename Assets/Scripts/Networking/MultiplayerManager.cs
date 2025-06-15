@@ -1,5 +1,6 @@
 using Mirror;
 using Retronia.Contents.Entities;
+using Retronia.Worlds;
 
 namespace Retronia.Networking
 {
@@ -12,6 +13,8 @@ namespace Retronia.Networking
       if (conn.identity.isClient)
       {
         conn.identity.GetComponent<NetworkTransformUnreliable>().syncDirection = SyncDirection.ClientToServer;
+        
+        BulletManager.InitClientPool(conn);
       }
     }
   }
