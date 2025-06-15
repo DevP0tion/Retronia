@@ -47,6 +47,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Character
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d150f8386e011349abdbf1aaa3ec62b
+    m_Address: Assets/Data/Prefabs/Bullet/ExampleBulletProperties.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Bullet
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 13b2ae3b7933d214a9f7b7353c3dfa40, type: 2}
   m_SchemaSet:

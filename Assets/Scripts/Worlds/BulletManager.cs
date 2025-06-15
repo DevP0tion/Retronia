@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mirror;
 using Retronia.Contents;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -6,7 +7,7 @@ using UnityEngine.Pool;
 
 namespace Retronia.Worlds
 {
-  public sealed class BulletManager : MonoBehaviour
+  public class BulletManager : MonoBehaviour
   {
     #region Singleton
 
@@ -32,33 +33,36 @@ namespace Retronia.Worlds
     #region Poolling
     
     [SerializeField] private Transform released;
+    [SerializeField] private List<GameObject> instances = new();
 
     /// <summary>
     ///   불릿 매니저 인스턴스가 바뀔 경우를 대비해 인스턴스 변수로 선언
     /// </summary>
     private readonly Dictionary<string, ObjectPool<Bullet>> pools = new();
 
-    private static ObjectPool<Bullet> InitPool(GameObject bulletPrefab)
+    private ObjectPool<Bullet> InitPool(GameObject bulletPrefab)
     {
-      if (Instance.pools.TryGetValue(bulletPrefab.name, out var pool)) return pool;
+      if (pools.TryGetValue(bulletPrefab.name, out var pool)) return pool;
 
-      return Instance.pools[bulletPrefab.name] = new ObjectPool<Bullet>(() =>
+      return pools[bulletPrefab.name] = new ObjectPool<Bullet>(() =>
         {
           // Create
           var bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();
+          instances.Add(bullet.gameObject);
+          NetworkServer.Spawn(bullet.gameObject);
           bullet.transform.SetParent(Instance.transform);
           return bullet;
         },
         bullet =>
         {
           // Get
-          bullet.gameObject.SetActive(true);
+          bullet.Active = true;
           bullet.transform.SetParent(Instance.transform);
         },
         bullet =>
         {
           // Release
-          bullet.gameObject.SetActive(false);
+          bullet.Active = false;
           bullet.transform.SetParent(Instance.released);
         },
         bullet =>
@@ -67,6 +71,14 @@ namespace Retronia.Worlds
           Destroy(bullet.gameObject);
         }
       );
+    }
+
+    public static void InitClientPool(NetworkConnectionToClient conn)
+    {
+      foreach (var obj in Instance.instances)
+      {
+        NetworkServer.Spawn(obj, conn);
+      }
     }
 
     /// <summary>
@@ -78,7 +90,7 @@ namespace Retronia.Worlds
     public static Bullet Get(string bulletName)
     {
       if (!Instance.pools.TryGetValue(bulletName, out var pool))
-        pool = InitPool(new AssetReference(bulletName).LoadAssetAsync<GameObject>().WaitForCompletion());
+        pool = Instance.InitPool(new AssetReference(bulletName).LoadAssetAsync<GameObject>().WaitForCompletion());
 
       return pool.Get();
     }

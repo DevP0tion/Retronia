@@ -1,4 +1,5 @@
 using System.Linq;
+using Mirror;
 using NaughtyAttributes;
 using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;
@@ -33,11 +34,9 @@ namespace Retronia.Contents
       if(attackCoolTime > 0) return;
       attackCoolTime = reloadTime;
       
-      var bullet = bullets.GetRandom().Create(team);
-      bullet.transform.position = transform.position;
-      bullet.transform.rotation = ((Vector2)transform.position).GetDirection(targetPosition);
-      bullet.direction = bullet.transform.rotation.ToVector2Direction();
-      bullet.damage *= damage;
+      var bullet = bullets.GetRandom().Create(team, transform.position);
+      
+      bullet.Shoot(targetPosition, damage);
     }
     
 #if UNITY_EDITOR
