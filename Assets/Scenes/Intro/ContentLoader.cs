@@ -42,14 +42,14 @@ namespace Retronia.Scenes.Intro
       GameManager.Instance.Load();
       var saveTask = SAVE.Load("default", true);
 
-      var loaderList = new[]
-      {
-        (name:"Shared Table", loader: sharedTableLoader),
-        (name:"언어 번들", loader: stringTableHandle),
-        (name:"아이템 정보", loader: ItemProperties.Load()),
-        (name:"소리 설정", loader: mixerHandle),
-        (name:"음원", loader: clipHandle),
-        (name:"캐릭터 정보", loader: CharacterProperties.Load())
+      (string name, AsyncOperationHandle loader)[] loaderList = {
+        ("Shared Table", sharedTableLoader),
+        ("언어 번들", stringTableHandle),
+        ("아이템 정보", ItemProperties.Load()),
+        ("탄환 정보", BulletProperties.Load()),
+        ("소리 설정", mixerHandle),
+        ("음원", clipHandle),
+        ("캐릭터 정보", CharacterProperties.Load())
       };
 
       foreach (var operation in loaderList)
