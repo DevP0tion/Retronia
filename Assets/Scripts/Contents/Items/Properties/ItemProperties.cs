@@ -11,9 +11,7 @@ namespace Retronia.Contents.Properties
   [CreateAssetMenu(fileName = "new Item Properties", menuName = "Properties/Basic Item")]
   public class ItemProperties : ScriptableObject
   {
-    public static bool Loaded { get; private set; } = false;
     public static readonly Dictionary<string, ItemProperties> items = new();
-    public const string Label = "Item"; 
     public static ItemProperties None => items.GetValueOrDefault("None");
     
     public Color color;
@@ -25,10 +23,9 @@ namespace Retronia.Contents.Properties
       => new (this, amount);
     
     #region Initialization
+    public static bool Loaded { get; private set; } = false;
+    public const string Label = "Item"; 
 
-    /// <summary>
-    /// 멀티스레드 비동기 로딩 구현을 하고싶었는데 비동기 구현시 무한로딩 문제???
-    /// </summary>
     public static AsyncOperationHandle Load()
     {
       if(Loaded) throw new InvalidOperationException("ItemProperties is already loaded.");
