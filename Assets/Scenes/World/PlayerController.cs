@@ -16,7 +16,6 @@ namespace Retronia.Scenes.World
     [Button]
     public void Test()
     {
-      BulletManager.Get("BasicBullet");
     }
 
     #region State

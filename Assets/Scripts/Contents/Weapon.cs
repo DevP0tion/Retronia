@@ -33,10 +33,9 @@ namespace Retronia.Contents
     {
       if(attackCoolTime > 0) return;
       attackCoolTime = reloadTime;
-      
-      var bullet = bullets.GetRandom().Create(team, transform.position);
-      
-      bullet.Shoot(targetPosition, damage);
+
+      var bullet = bullets.GetRandom();
+      BulletManager.Shoot(bullet, transform.position, targetPosition, team, damage);
     }
     
 #if UNITY_EDITOR

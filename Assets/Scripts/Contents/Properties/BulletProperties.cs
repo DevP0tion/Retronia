@@ -21,23 +21,13 @@ namespace Retronia.Contents.Properties
     public float speed = 1;
     public float damageMultiplier = 1;
 
-    public virtual Bullet Create(Team team, Vector3 position = default)
-    {
-      var bullet = BulletManager.Get(bulletName);
-      bullet.Init(this, team, position);
-
-      return bullet;
-    }
-    
-    public virtual Bullet Create() => Create(Team.None);
-
     #region Initialization
     public static bool Loaded { get; private set; } = false;
     public const string Label = "Bullet"; 
     
     public static AsyncOperationHandle Load()
     {
-      if(Loaded) throw new InvalidOperationException("ItemProperties is already loaded.");
+      if(Loaded) throw new InvalidOperationException("BulletProperties is already loaded.");
       Loaded = true;
       
       return Addressables.LoadAssetsAsync<BulletProperties>(new AssetLabelReference{labelString = Label}, properties =>

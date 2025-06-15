@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Retronia.Contents
 {
-  public class Bullet : NetworkBehaviour
+  public class Bullet : MonoBehaviour
   {
     #region State
 
@@ -22,15 +22,6 @@ namespace Retronia.Contents
     public float damage = 1;
     public Team team = Team.None;
     public Vector2 direction;
-
-    public bool Active
-    {
-      get => gameObject.activeSelf;
-      set
-      {
-        if (NetworkServer.active) SetActive(value);
-      }
-    }
 
     #endregion
     
@@ -77,26 +68,6 @@ namespace Retronia.Contents
 
     #endregion
     
-    #region Core
-    
-    protected virtual void ShootFunc(Vector2 targetPosition, float damage)
-    {
-      transform.rotation = ((Vector2)transform.position).GetDirection(targetPosition);
-      direction = transform.rotation.ToVector2Direction();
-      this.damage = damage;
-    }
-
-    protected virtual void InitFunc(BulletProperties properties, Team team, Vector3 position)
-    {
-      if (properties == null) return;
-      
-      Properties = properties;
-      transform.position = position;
-      this.team = team;
-    }
-    
-    #endregion
-
     #region Interface
 
     public virtual BulletProperties Properties
@@ -107,38 +78,6 @@ namespace Retronia.Contents
         properties = value;
         speed = properties.speed;
         damage = properties.damageMultiplier;
-      }
-    }
-
-    public void Shoot(Vector2 targetPosition, float damage)
-    {
-      if (NetworkServer.active)
-      {
-        ShootFunc(targetPosition, damage);
-        foreach (var _ in NetworkServer.connections.Values)
-        {
-          ShootRpc(targetPosition, damage);
-        }
-      }
-      else
-      {
-        ShootRequest(targetPosition, damage);
-      }
-    }
-
-    public void Init(BulletProperties properties, Team team, Vector3 position)
-    {
-      if (NetworkServer.active)
-      {
-        InitFunc(properties, team, position);
-        foreach (var _ in NetworkServer.connections.Values)
-        {
-          InitRpc(properties.name, team.Name, position);
-        }
-      }
-      else
-      {
-        InitRequest(properties.name, team.Name, position);
       }
     }
 
@@ -154,49 +93,6 @@ namespace Retronia.Contents
       Release();
     }
 
-    #endregion
-    
-    #region Networking
-
-    [ClientRpc]
-    private void SetActive(bool active)
-    {
-      gameObject.SetActive(active);
-    }
-
-    [Command]
-    private void ShootRequest(Vector2 targetPosition, float damage)
-    {
-      ShootFunc(targetPosition, damage);
-
-      foreach (var _ in NetworkServer.connections.Values.Where(conn => conn != connectionToClient))
-      {
-        ShootRpc(targetPosition, damage);
-      }
-    }
-
-    [ClientRpc]
-    private void ShootRpc(Vector2 targetPosition, float damage)
-    {
-      ShootFunc(targetPosition, damage);
-    }
-
-    [Command]
-    private void InitRequest(string propertiesName, string teamName, Vector3 position)
-    {
-      InitFunc(BulletProperties.Bullets[propertiesName], teamName, position);
-      foreach (var _ in NetworkServer.connections.Values.Where(conn => conn != connectionToClient))
-      {
-        InitRpc(propertiesName, teamName, position);
-      }
-    }
-    
-    [ClientRpc]
-    private void InitRpc(string propertiesName, string teamName, Vector3 position)
-    {
-      InitFunc(BulletProperties.Bullets[propertiesName], teamName, position);
-    }
-    
     #endregion
   }
 }

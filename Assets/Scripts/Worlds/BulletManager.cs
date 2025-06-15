@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using Mirror;
 using Retronia.Contents;
+using Retronia.Contents.Properties;
+using Retronia.Utils;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Pool;
 
 namespace Retronia.Worlds
 {
-  public class BulletManager : MonoBehaviour
+  public class BulletManager : NetworkBehaviour
   {
     #region Singleton
 
-    private static BulletManager instance;
+    private static BulletManager instance = null;
 
     public static BulletManager Instance
     {
@@ -20,6 +22,7 @@ namespace Retronia.Worlds
         if (instance) return instance;
 
         instance = new GameObject("BulletManager").AddComponent<BulletManager>();
+        instance.gameObject.AddComponent<NetworkIdentity>();
         instance.released = new GameObject("Released").transform;
         instance.released.transform.SetParent(instance.transform);
 
@@ -49,20 +52,19 @@ namespace Retronia.Worlds
           // Create
           var bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();
           instances.Add(bullet.gameObject);
-          NetworkServer.Spawn(bullet.gameObject);
           bullet.transform.SetParent(Instance.transform);
           return bullet;
         },
         bullet =>
         {
           // Get
-          bullet.Active = true;
+          bullet.gameObject.SetActive(true);
           bullet.transform.SetParent(Instance.transform);
         },
         bullet =>
         {
           // Release
-          bullet.Active = false;
+          bullet.gameObject.SetActive(false);
           bullet.transform.SetParent(Instance.released);
         },
         bullet =>
@@ -75,19 +77,15 @@ namespace Retronia.Worlds
 
     public static void InitClientPool(NetworkConnectionToClient conn)
     {
-      foreach (var obj in Instance.instances)
-      {
-        NetworkServer.Spawn(obj, conn);
-      }
+      NetworkServer.Spawn(instance.gameObject, conn);
     }
 
     /// <summary>
     ///   이름에 맞는 탄환을 풀링하는 코드
-    ///   임시 구현 / TODO 탄환을 한번에 관리하는 매니저가 필요함
     /// </summary>
     /// <param name="bulletName">풀링할 탄환 원본 프리팹의 명칭</param>
     /// <returns>풀링된 탄환 오브젝트의 컴포넌트</returns>
-    public static Bullet Get(string bulletName)
+    private static Bullet Get(string bulletName)
     {
       if (!Instance.pools.TryGetValue(bulletName, out var pool))
         pool = Instance.InitPool(new AssetReference(bulletName).LoadAssetAsync<GameObject>().WaitForCompletion());
@@ -111,6 +109,63 @@ namespace Retronia.Worlds
         Destroy(bullet.gameObject);
     }
 
+    #endregion
+    
+    private void ShootFunc(BulletProperties properties, Vector3 startPos, Vector2 targetPosition, Team team, float damage)
+    {
+      var bullet = pools[properties.bulletName].Get();
+      bullet.transform.position = startPos;
+      bullet.team = team;
+      bullet.transform.rotation = ((Vector2)bullet.transform.position).GetDirection(targetPosition);
+      bullet.direction = transform.rotation.ToVector2Direction();
+      bullet.damage = damage;
+    }
+
+    public static void Shoot(BulletProperties type, Vector3 startPos, Vector2 targetPos, Team team, float damage = 1)
+    {
+      if (NetworkServer.active)
+      {
+        instance.ShootFunc(type, startPos, targetPos, team, damage);
+        instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
+      }
+      else
+      {
+        instance.ShootRequest(type.name, startPos, targetPos, team.Name, damage);
+      }
+    }
+    
+    #region Networking
+
+    [Command]
+    private void ShootRequest(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
+    {
+      Shoot(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
+    }
+
+    [ClientRpc]
+    private void ShootRpc(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
+    {
+      instance.ShootFunc(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
+    }
+    
+    #endregion
+    
+    #region Unity Event
+
+    private void Awake()
+    {
+      if (!instance)
+      {
+        instance = this;
+        instance.released = new GameObject("Released").transform;
+        instance.released.transform.SetParent(instance.transform);
+      }
+      else
+      {
+        Destroy(gameObject);
+      }
+    }
+    
     #endregion
   }
 }
