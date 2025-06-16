@@ -21,9 +21,8 @@ namespace Retronia.Worlds
       {
         if (instance) return instance;
 
-        instance = new GameObject("BulletManager").AddComponent<BulletManager>();
-        instance.gameObject.AddComponent<NetworkIdentity>();
-
+        var obj = new GameObject("BulletManager", typeof(NetworkIdentity));
+        instance = obj.gameObject.AddComponent<BulletManager>();
         return instance;
       }
     }
@@ -75,7 +74,7 @@ namespace Retronia.Worlds
 
     public static void InitClientPool(NetworkConnectionToClient conn)
     {
-      NetworkServer.Spawn(Instance.gameObject, conn);
+      // NetworkServer.Spawn(Instance.gameObject, conn);
     }
 
     /// <summary>
@@ -125,11 +124,11 @@ namespace Retronia.Worlds
       if (NetworkServer.active)
       {
         ShootFunc(type, startPos, targetPos, team, damage);
-        instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
+        Instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
       }
       else
       {
-        instance.ShootRequest(type.name, startPos, targetPos, team.Name, damage);
+        Instance.ShootRequest(type.name, startPos, targetPos, team.Name, damage);
       }
     }
     
@@ -155,15 +154,17 @@ namespace Retronia.Worlds
 
     private void Awake()
     {
-      if (!instance)
+      var releasedContainer = new GameObject("Released").transform;
+      releasedContainer.SetParent(transform);
+      released = releasedContainer;
+      
+      if (NetworkServer.active)
       {
-        instance = this;
-        instance.released = new GameObject("Released").transform;
-        instance.released.transform.SetParent(instance.transform);
+        NetworkServer.Spawn(gameObject);
       }
       else
       {
-        Destroy(gameObject);
+        instance = this;
       }
     }
     

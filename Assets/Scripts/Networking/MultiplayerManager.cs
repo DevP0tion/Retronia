@@ -12,7 +12,7 @@ namespace Retronia.Networking
       if (conn.identity.isClient)
       {
         conn.identity.GetComponent<NetworkTransformUnreliable>().syncDirection = SyncDirection.ClientToServer;
-        BulletManager.InitClientPool(conn);
+        // BulletManager.InitClientPool(conn);
       }
     }
 
