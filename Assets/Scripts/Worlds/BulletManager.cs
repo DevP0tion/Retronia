@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Mirror;
 using Retronia.Contents;
@@ -12,22 +13,7 @@ namespace Retronia.Worlds
   public class BulletManager : NetworkBehaviour
   {
     #region Singleton
-
-    private static BulletManager instance = null;
-
-    public static BulletManager Instance
-    {
-      get
-      {
-        if (instance) return instance;
-
-        var obj = new GameObject("BulletManager", typeof(NetworkIdentity));
-        instance = obj.gameObject.AddComponent<BulletManager>();
-        return instance;
-      }
-    }
-
-    
+    public static BulletManager Instance { get; private set; }
     #endregion
 
     #region Poolling
@@ -70,11 +56,6 @@ namespace Retronia.Worlds
           Destroy(bullet.gameObject);
         }
       );
-    }
-
-    public static void InitClientPool(NetworkConnectionToClient conn)
-    {
-      // NetworkServer.Spawn(Instance.gameObject, conn);
     }
 
     /// <summary>
@@ -134,7 +115,7 @@ namespace Retronia.Worlds
     
     #region Networking
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void ShootRequest(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
     {
       Shoot(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
@@ -154,18 +135,13 @@ namespace Retronia.Worlds
 
     private void Awake()
     {
-      var releasedContainer = new GameObject("Released").transform;
-      releasedContainer.SetParent(transform);
-      released = releasedContainer;
-      
-      if (NetworkServer.active)
-      {
-        NetworkServer.Spawn(gameObject);
-      }
-      else
-      {
-        instance = this;
-      }
+      Instance = this;
+    }
+    
+    private void OnDestroy()
+    {
+      if (Instance == this)
+        Instance = null;
     }
     
     #endregion
