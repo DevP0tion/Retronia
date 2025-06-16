@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Mirror;
 using Retronia.Contents;
 using Retronia.Contents.Properties;
 using Retronia.Utils;
@@ -9,7 +8,7 @@ using UnityEngine.Pool;
 
 namespace Retronia.Worlds
 {
-  public class BulletManager : NetworkBehaviour
+  public class BulletManager : MonoBehaviour
   {
     #region Singleton
 
@@ -21,7 +20,7 @@ namespace Retronia.Worlds
       {
         if (instance) return instance;
 
-        var obj = new GameObject("BulletManager", typeof(NetworkIdentity));
+        var obj = new GameObject("BulletManager");
         instance = obj.gameObject.AddComponent<BulletManager>();
         return instance;
       }
@@ -72,11 +71,6 @@ namespace Retronia.Worlds
       );
     }
 
-    public static void InitClientPool(NetworkConnectionToClient conn)
-    {
-      // NetworkServer.Spawn(Instance.gameObject, conn);
-    }
-
     /// <summary>
     ///   이름에 맞는 탄환을 풀링하는 코드
     /// </summary>
@@ -121,53 +115,7 @@ namespace Retronia.Worlds
 
     public static void Shoot(BulletProperties type, Vector3 startPos, Vector2 targetPos, Team team, float damage = 1)
     {
-      if (NetworkServer.active)
-      {
-        ShootFunc(type, startPos, targetPos, team, damage);
-        Instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
-      }
-      else
-      {
-        Instance.ShootRequest(type.name, startPos, targetPos, team.Name, damage);
-      }
+      ShootFunc(type, startPos, targetPos, team, damage);
     }
-    
-    #region Networking
-
-    [Command]
-    private void ShootRequest(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
-    {
-      Shoot(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
-    }
-
-    [ClientRpc]
-    private void ShootRpc(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
-    {
-      if(NetworkServer.active) return;
-      
-      ShootFunc(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
-    }
-    
-    #endregion
-    
-    #region Unity Event
-
-    private void Awake()
-    {
-      var releasedContainer = new GameObject("Released").transform;
-      releasedContainer.SetParent(transform);
-      released = releasedContainer;
-      
-      if (NetworkServer.active)
-      {
-        NetworkServer.Spawn(gameObject);
-      }
-      else
-      {
-        instance = this;
-      }
-    }
-    
-    #endregion
   }
 }

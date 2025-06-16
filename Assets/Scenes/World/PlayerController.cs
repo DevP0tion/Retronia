@@ -1,11 +1,8 @@
 using NaughtyAttributes;
-using Retronia.Contents;
 using Retronia.Contents.Entities;
 using Retronia.Utils;
 using Retronia.Utils.UI;
-using Retronia.Worlds;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Retronia.Scenes.World

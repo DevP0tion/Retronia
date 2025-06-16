@@ -1,5 +1,4 @@
 using System.Linq;
-using Mirror;
 using NaughtyAttributes;
 using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;

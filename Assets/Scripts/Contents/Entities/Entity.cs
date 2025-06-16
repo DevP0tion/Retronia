@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Mirror;
 using Retronia.Contents.Properties;
-using Retronia.Scenes.World;
 using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;
@@ -9,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Retronia.Contents.Entities
 {
-  public class Entity : NetworkBehaviour
+  public class Entity : MonoBehaviour
   {
     #region State
 
@@ -89,20 +87,6 @@ namespace Retronia.Contents.Entities
 
         if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
           onOverflowMap?.Invoke(viewPos);
-      }
-    }
-
-    #endregion
-    
-    #region Networking
-
-    public override void OnStartLocalPlayer()
-    {
-      base.OnStartLocalPlayer();
-      PlayerController.Instance.Entity = this;
-      if (!NetworkServer.active)
-      {
-        GetComponent<NetworkTransformUnreliable>().syncDirection = SyncDirection.ClientToServer;
       }
     }
 
