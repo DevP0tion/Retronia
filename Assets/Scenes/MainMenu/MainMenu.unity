@@ -5269,6 +5269,10 @@ PrefabInstance:
       value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
+      propertyPath: onlineScene
+      value: Assets/Scenes/World/World.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448222988921329439, guid: a2ffb8e858cf6a94aad6647e947b50c5, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
