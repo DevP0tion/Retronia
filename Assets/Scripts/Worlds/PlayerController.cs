@@ -1,14 +1,12 @@
+using Cinemachine;
 using NaughtyAttributes;
-using Retronia.Contents;
 using Retronia.Contents.Entities;
 using Retronia.Utils;
 using Retronia.Utils.UI;
-using Retronia.Worlds;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Retronia.Scenes.World
+namespace Retronia.Worlds
 {
   public class PlayerController : MonoBehaviour
   {
@@ -39,6 +37,7 @@ namespace Retronia.Scenes.World
     [SerializeField] private new Camera camera;
     [SerializeField] private Transform arrow;
     [SerializeField] private UIGaugeBar healthPointBar;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     #endregion
 
@@ -102,7 +101,14 @@ namespace Retronia.Scenes.World
       set
       {
         if (entity) entity.healthPoint.onChanged.RemoveListener(HealthHook);
-        if (value) value.healthPoint.onChanged.AddListener(HealthHook);
+        if (value)
+        {
+          value.healthPoint.onChanged.AddListener(HealthHook);
+          healthPointBar.max = value.healthPoint.Max;
+          healthPointBar.Value = value.healthPoint.Value;
+          virtualCamera.Follow = value.transform;
+          virtualCamera.LookAt = value.transform;
+        }
         entity = value;
       }
     }
