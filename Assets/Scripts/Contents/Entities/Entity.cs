@@ -35,7 +35,6 @@ namespace Retronia.Contents.Entities
 
     #region Exports
 
-    public UnityEvent<Vector3> onOverflowMap = new();
     public Rigidbody2D Body => body;
 
     public virtual EntityProperties Data
@@ -69,27 +68,6 @@ namespace Retronia.Contents.Entities
     private void Awake()
     {
       camera = Camera.main;
-
-      onOverflowMap.AddListener(viewPos =>
-      {
-        // 맵 밖으로 나갔을 시 반대편으로 오게끔
-        if (camera != null)
-          transform.position = camera.ViewportToWorldPoint(new Vector3(
-            viewPos.x > 1 ? 0 : viewPos.x < 0 ? 1 : viewPos.x,
-            viewPos.y > 1 ? 0 : viewPos.y < 0 ? 1 : viewPos.y,
-            0)).Z(0);
-      });
-    }
-
-    private void FixedUpdate()
-    {
-      // 엔티티가 화면 밖으로 나갔을 때 이벤트
-      {
-        var viewPos = camera.WorldToViewportPoint(transform.position);
-
-        if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
-          onOverflowMap?.Invoke(viewPos);
-      }
     }
 
     #endregion

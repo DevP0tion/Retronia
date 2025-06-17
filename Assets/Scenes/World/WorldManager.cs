@@ -1,14 +1,15 @@
 using Retronia.Utils;
+using Retronia.Worlds;
 using UnityEngine;
 
 namespace Retronia.Scenes.World
 {
   public sealed class WorldManager : MonoBehaviour
   {
+    private static PlayerController Player => PlayerController.Instance;
     public static WorldManager Instance { get; private set; }
 
     [SerializeField, GetSet(nameof(Pause))] private bool pause = false;
-    [SerializeField] private PlayerController player;
 
     public bool Pause
     {
@@ -32,6 +33,11 @@ namespace Retronia.Scenes.World
       {
         Instance = this;
       }
+    }
+
+    private void OnDestroy()
+    {
+      Instance = null;
     }
     
     #endregion

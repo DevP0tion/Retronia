@@ -176,9 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4812998c834c53be501bbe1c20752f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   camera: {fileID: 0}
   properties: {fileID: 0}
   speed: 1
