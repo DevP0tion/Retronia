@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Retronia.Scenes.World
 {
@@ -25,6 +26,18 @@ namespace Retronia.Scenes.World
     private void LoadPausePanel()
     {
       
+    }
+
+    public void ExitWorld()
+    {
+      if(NetworkServer.active)
+        NetworkManager.singleton.StopHost();
+      else
+      {
+        NetworkClient.Disconnect();
+        NetworkManager.singleton?.StopClient();
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+      }
     }
     
     #endregion

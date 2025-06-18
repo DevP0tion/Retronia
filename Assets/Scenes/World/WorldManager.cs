@@ -1,3 +1,4 @@
+using Mirror;
 using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;
@@ -17,7 +18,8 @@ namespace Retronia.Scenes.World
       set
       {
         pause = value;
-        Time.timeScale = pause ? 0 : 1;
+        if(NetworkManager.singleton && NetworkManager.singleton.isNetworkActive)
+          Time.timeScale = pause ? 0 : 1;
       }
     }
     
