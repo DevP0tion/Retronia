@@ -136,7 +136,7 @@ namespace Retronia.Scenes.Lobby
     
     #if UNITY_EDITOR
     
-    [SerializeField, GetSet(nameof(OpenEquipSlots))] private bool openEquipSlots = false;
+    [SerializeField, GetSet(nameof(OpenEquipSlots))] private bool openEquipSlots;
     
     #endif
   }
