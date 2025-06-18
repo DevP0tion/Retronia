@@ -175,6 +175,10 @@ MonoBehaviour:
     m_Key: Global_addressLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 8775888047407104
+    m_Key: World_closePanelLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
