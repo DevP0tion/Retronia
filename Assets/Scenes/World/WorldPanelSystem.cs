@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 namespace Retronia.Scenes.World
@@ -34,6 +35,15 @@ namespace Retronia.Scenes.World
     {
       LoadMainPanel();
       LoadPausePanel();
+    }
+
+    private void Update()
+    {
+      if (Input.GetKeyDown(KeyCode.Escape))
+      {
+        WorldManager.Instance.Pause = !WorldManager.Instance.Pause;
+        pausePanel.SetActive(WorldManager.Instance.Pause);
+      }
     }
     
     #endregion
