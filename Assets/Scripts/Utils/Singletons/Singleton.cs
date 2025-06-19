@@ -1,4 +1,4 @@
-namespace Retronia.Utils
+namespace Retronia.Utils.Singletons
 {
   using UnityEngine;
 

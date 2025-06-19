@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Retronia.Utils
+namespace Retronia.Utils.Singletons
 {
-  public class DDOLSingleton<T> : Singleton<T> where T : MonoBehaviour
+  public class DDOLSingleton<T> : MonoBehaviour where T : MonoBehaviour
   {
     private void Awake()
     {
