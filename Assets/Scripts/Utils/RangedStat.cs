@@ -9,11 +9,11 @@ namespace Retronia.Utils
   {
     public UnityEvent<float> onChanged;
 
-    [SerializeField] [GetSet("Value")] private float value;
+    [SerializeField] [GetSet(nameof(Value))] private float value;
     [SerializeField] private Stat max;
 
 #if UNITY_EDITOR
-    [SerializeField] [GetSet("Max")] private float maxValue;
+    [SerializeField] [GetSet(nameof(Max))] private float maxValue;
 #endif
 
     public RangedStat(float maxValue, float value, StatOperator<float> maxEffect = null)
@@ -43,6 +43,7 @@ namespace Retronia.Utils
       get => max;
       set
       {
+        max ??= new Stat(value);
         max.BaseValue = value;
         Value = this.value;
       }
