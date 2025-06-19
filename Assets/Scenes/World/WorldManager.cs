@@ -1,16 +1,28 @@
 using Mirror;
+using NaughtyAttributes;
 using Retronia.Utils;
+using Retronia.Utils.Singletons;
 using Retronia.Worlds;
 using UnityEngine;
 
 namespace Retronia.Scenes.World
 {
-  public sealed class WorldManager : MonoBehaviour
+  public class WorldManager : NetworkSingleton<WorldManager>
   {
-    private static PlayerController Player => PlayerController.Instance;
-    public static WorldManager Instance { get; private set; }
+    protected static PlayerController Player => PlayerController.Instance;
 
+    #region Inspector
+    
     [SerializeField, GetSet(nameof(Pause))] private bool pause = false;
+    
+    #endregion
+    
+    #region Binding
+    
+    [SerializeField] protected Transform objectContainer;
+    [SerializeField] protected Transform enemyContainer;
+    
+    #endregion
 
     public bool Pause
     {
@@ -27,20 +39,26 @@ namespace Retronia.Scenes.World
     
     private void Awake()
     {
-      if(Instance)
+      enemyContainer = new GameObject("Enemies").transform;
+      enemyContainer.SetParent(objectContainer);
+    }
+    
+#if UNITY_EDITOR
+
+    [Button("Init")]
+    private void Reset()
+    {
+      if (objectContainer)
       {
-        Destroy(gameObject);
-      }
-      else
-      {
-        Instance = this;
+        if (!enemyContainer)
+        {
+          enemyContainer = new GameObject("Enemies").transform;
+          enemyContainer.SetParent(objectContainer);
+        }
       }
     }
 
-    private void OnDestroy()
-    {
-      Instance = null;
-    }
+#endif
     
     #endregion
   }
