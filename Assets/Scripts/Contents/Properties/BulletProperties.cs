@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Retronia.Core;
+using Retronia.Networking.Formats;
 using Retronia.Worlds;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -17,9 +18,11 @@ namespace Retronia.Contents.Properties
     ///   탄환을 풀링할 원본 프리팹의 이름
     /// </summary>
     public string bulletName;
-
     public float speed = 1;
     public float damageMultiplier = 1;
+
+    public void Shoot(Team team, Vector3 startPosition, Vector3 targetPosition, float damage = 1)
+      => BulletManager.Shoot(new BulletPacket(this, team, startPosition, targetPosition, damage));
 
     #region Initialization
     public static bool Loaded { get; private set; } = false;

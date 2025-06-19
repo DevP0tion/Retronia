@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mirror;
 using Retronia.Contents;
 using Retronia.Contents.Properties;
+using Retronia.Networking.Formats;
 using Retronia.Utils;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -89,7 +90,7 @@ namespace Retronia.Worlds
 
     #endregion
     
-    private static void ShootFunc(BulletProperties properties, Vector3 startPos, Vector2 targetPosition, Team team, float damage)
+    private static void ShootFunc(BulletProperties properties, Vector3 startPos, Vector3 targetPosition, Team team, float damage)
     {
       var bullet = Get(properties.bulletName);
       bullet.Properties = properties;
@@ -100,33 +101,30 @@ namespace Retronia.Worlds
       bullet.damage = damage;
     }
 
-    public static void Shoot(BulletProperties type, Vector3 startPos, Vector2 targetPos, Team team, float damage = 1)
+    public static void Shoot(BulletPacket packet)
     {
       if (NetworkServer.active)
       {
-        ShootFunc(type, startPos, targetPos, team, damage);
-        Instance.ShootRpc(type.name, startPos, targetPos, team.Name, damage);
+        ShootFunc(packet.Type, packet.startPos, packet.targetPos, packet.Team, packet.damage);
+        Instance.ShootRpc(packet);
       }
       else
       {
-        Instance.ShootRequest(type.name, startPos, targetPos, team.Name, damage);
+        Instance.ShootRequest(packet);
       }
     }
     
     #region Networking
 
     [Command(requiresAuthority = false)]
-    private void ShootRequest(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
-    {
-      Shoot(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
-    }
+    private void ShootRequest(BulletPacket packet) => Shoot(packet);
 
     [ClientRpc]
-    private void ShootRpc(string bulletName, Vector3 startPos, Vector2 targetPos, string teamName, float damage)
+    private void ShootRpc(BulletPacket packet)
     {
       if(NetworkServer.active) return;
       
-      ShootFunc(BulletProperties.Bullets[bulletName], startPos, targetPos, Team.Get(teamName), damage);
+      ShootFunc(BulletProperties.Bullets[packet.Type.bulletName], packet.startPos, packet.targetPos, packet.Team, packet.damage);
     }
     
     #endregion

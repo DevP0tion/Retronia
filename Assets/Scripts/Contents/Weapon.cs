@@ -3,6 +3,7 @@ using Mirror;
 using NaughtyAttributes;
 using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;
+using Retronia.Networking.Formats;
 using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;
@@ -29,13 +30,13 @@ namespace Retronia.Contents
       if(attackCoolTime > 0) attackCoolTime -= Time.deltaTime;
     }
     
-    public virtual void Shoot(Vector2 targetPosition)
+    public virtual void Shoot(Vector3 targetPosition)
     {
       if(attackCoolTime > 0) return;
       attackCoolTime = reloadTime;
 
       var bullet = bullets.GetRandom();
-      BulletManager.Shoot(bullet, transform.position, targetPosition, team, damage);
+      bullet.Shoot(team, transform.position, targetPosition, damage);
     }
     
 #if UNITY_EDITOR
