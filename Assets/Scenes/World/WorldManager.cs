@@ -20,7 +20,6 @@ namespace Retronia.Scenes.World
     #region Binding
     
     [SerializeField] protected Transform objectContainer;
-    [SerializeField] protected Transform enemyContainer;
     
     #endregion
 
@@ -34,32 +33,5 @@ namespace Retronia.Scenes.World
           Time.timeScale = pause ? 0 : 1;
       }
     }
-    
-    #region Unity Event
-    
-    private void Awake()
-    {
-      enemyContainer = new GameObject("Enemies").transform;
-      enemyContainer.SetParent(objectContainer);
-    }
-    
-#if UNITY_EDITOR
-
-    [Button("Init")]
-    private void Reset()
-    {
-      if (objectContainer)
-      {
-        if (!enemyContainer)
-        {
-          enemyContainer = new GameObject("Enemies").transform;
-          enemyContainer.SetParent(objectContainer);
-        }
-      }
-    }
-
-#endif
-    
-    #endregion
   }
 }
