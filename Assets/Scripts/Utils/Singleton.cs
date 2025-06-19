@@ -26,5 +26,10 @@ namespace Retronia.Utils
         return instance;
       }
     }
+
+    public void OnDestroy()
+    {
+      instance = null;
+    }
   }
 }
