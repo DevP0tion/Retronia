@@ -1,6 +1,6 @@
 using Mirror;
 
-namespace Retronia.Networking.Formats
+namespace Retronia.Networking.Packets
 {
   public static class PacketExtension
   {

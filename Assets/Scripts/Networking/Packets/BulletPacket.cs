@@ -1,11 +1,10 @@
 using System;
 using Mirror;
 using Retronia.Contents.Properties;
-using Retronia.Networking.Formats;
 using Retronia.Worlds;
 using UnityEngine;
 
-namespace Retronia.Networking.Formats
+namespace Retronia.Networking.Packets
 {
   [Serializable]
   public struct BulletPacket : NetworkMessage

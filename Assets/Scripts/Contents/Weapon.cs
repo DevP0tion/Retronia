@@ -3,7 +3,7 @@ using Mirror;
 using NaughtyAttributes;
 using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;
-using Retronia.Networking.Formats;
+using Retronia.Networking.Packets;
 using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;

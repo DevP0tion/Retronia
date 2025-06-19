@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mirror;
 using Retronia.Contents;
 using Retronia.Contents.Properties;
-using Retronia.Networking.Formats;
+using Retronia.Networking.Packets;
 using Retronia.Utils;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -124,7 +124,7 @@ namespace Retronia.Worlds
     {
       if(NetworkServer.active) return;
       
-      ShootFunc(BulletProperties.Bullets[packet.Type.bulletName], packet.startPos, packet.targetPos, packet.Team, packet.damage);
+      ShootFunc(BulletProperties.Bullets[packet.typeName], packet.startPos, packet.targetPos, packet.Team, packet.damage);
     }
     
     #endregion
