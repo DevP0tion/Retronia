@@ -27,7 +27,7 @@ namespace Retronia.Contents.Entities
     #region Bindings
     [Header("Entity Bindings")]
     
-    [SerializeField] private new Camera camera;
+    [SerializeField] protected new Camera camera;
     [SerializeField] protected Rigidbody2D body;
     public List<Weapon> weapons = new();
 
