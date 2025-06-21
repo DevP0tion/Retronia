@@ -1,8 +1,8 @@
+title: "[질문]"
+labels: ["Q&A"]
 body:
 - attributes:
-    value: '❓ 궁금한 점이 있다면 자유롭게 질문해 주세요!
-
-      다른 팀원들이 함께 도와드릴 수 있어요 😊'
+    value: '❓ 궁금한 점이 있다면 자유롭게 질문해 주세요! 다른 팀원들이 함께 도와드릴 수 있어요 😊'
   type: markdown
 - attributes:
     description: 질문을 간단히 요약해주세요.
@@ -45,6 +45,3 @@ body:
 - attributes:
     value: 📬 질문을 올려주셔서 감사합니다! 답변이 달리면 알림을 꼭 확인해 주세요.
   type: markdown
-labels:
-- Q&A
-title: '[질문] '
