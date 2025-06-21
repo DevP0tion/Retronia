@@ -129,6 +129,20 @@ namespace Retronia.Worlds
     {
       attacking = context.performed;
     }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+      var input = context.ReadValue<float>();
+
+      if (Mathf.Approximately(input, 1))
+      {
+        // body.AddForce(body.rotation.ToDirection() * entity.speed, ForceMode2D.Impulse)
+      }
+      else
+      {
+        
+      }
+    }
     
     #endregion
   }

@@ -38,14 +38,6 @@ namespace Retronia.Contents
       var bullet = bullets.GetRandom();
       bullet.Shoot(team, transform.position, targetPosition, damage);
     }
-    
-#if UNITY_EDITOR
-    [SerializeField] private Entity entity; 
-    
-    [Button("TestShoot")]
-    public void Shoot() => Shoot(entity.direction);
-    
-#endif
 
     public void SetBullets(params BulletProperties[] bullets)
     {

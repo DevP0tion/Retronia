@@ -22,12 +22,13 @@ namespace Retronia.Contents.Entities
     public RangedStat healthPoint;
     public Team team = Team.None;
 
+    
+    
     #endregion
 
     #region Bindings
     [Header("Entity Bindings")]
     
-    [SerializeField] protected new Camera camera;
     [SerializeField] protected Rigidbody2D body;
     public List<Weapon> weapons = new();
 
@@ -56,18 +57,8 @@ namespace Retronia.Contents.Entities
 
     #region Unity Events
 
-#if UNITY_EDITOR
-
-    private void Reset()
-    {
-      camera = Camera.main;
-    }
-
-#endif
-
     private void Awake()
     {
-      camera = Camera.main;
     }
 
     #endregion
