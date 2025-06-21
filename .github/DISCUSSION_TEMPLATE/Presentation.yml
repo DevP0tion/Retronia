@@ -1,0 +1,50 @@
+body:
+- attributes:
+    value: '✨ 멋진 작업 결과를 공유해 주세요!
+
+      스크린샷, 영상, 설명 등 어떤 방식이든 환영입니다 🙌'
+  type: markdown
+- attributes:
+    description: 성과나 작업물의 핵심을 간단히 적어주세요.
+    label: 공유 제목
+    placeholder: '예: ''1스테이지 보스 패턴 구현 완료'''
+  id: title
+  type: input
+  validations:
+    required: true
+- attributes:
+    description: 작업한 내용을 상세히 설명해 주세요. 어떤 기술을 사용했는지, 어떤 문제가 있었는지 등도 좋아요.
+    label: 설명
+    placeholder: '예: 투사체 충돌이 벽을 통과하던 버그를 수정했고, 충돌 시 파티클 효과도 추가했습니다.'
+  id: description
+  type: textarea
+  validations:
+    required: true
+- attributes:
+    description: 스크린샷, GIF, 유튜브 링크, 영상 주소 등을 첨부해 주세요.
+    label: 첨부 자료 (선택)
+    placeholder: '예: https://youtu.be/example'
+  id: media
+  type: textarea
+  validations:
+    required: false
+- attributes:
+    description: 어떤 분야의 작업인가요?
+    label: 작업 분류
+    options:
+    - 전투 시스템
+    - UI/UX
+    - 애니메이션
+    - 사운드
+    - 기획
+    - 기타
+  id: category
+  type: dropdown
+  validations:
+    required: false
+- attributes:
+    value: 🎉 공유해주셔서 감사합니다! 다른 팀원에게도 큰 동기부여가 될 수 있어요.
+  type: markdown
+labels:
+- 개발 성과 공유
+title: '[성과 공유] '
