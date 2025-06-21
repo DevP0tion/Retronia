@@ -1,0 +1,50 @@
+body:
+- attributes:
+    value: '❓ 궁금한 점이 있다면 자유롭게 질문해 주세요!
+
+      다른 팀원들이 함께 도와드릴 수 있어요 😊'
+  type: markdown
+- attributes:
+    description: 질문을 간단히 요약해주세요.
+    label: 질문 제목
+    placeholder: '예: ''타일맵 충돌이 무시되는 현상에 대해'''
+  id: question-title
+  type: input
+  validations:
+    required: true
+- attributes:
+    description: 문제가 발생한 상황이나 궁금한 점을 구체적으로 설명해 주세요.
+    label: 질문 내용
+    placeholder: 어떤 상황에서 문제가 발생했고, 어떤 결과를 기대했는지 작성해 주세요.
+  id: question-details
+  type: textarea
+  validations:
+    required: true
+- attributes:
+    description: 질문이 어느 분야와 관련되어 있나요?
+    label: 관련 분야
+    options:
+    - Unity 기능
+    - 전투 시스템
+    - UI/UX
+    - 기획
+    - 버그 추정
+    - 기타
+  id: area
+  type: dropdown
+  validations:
+    required: false
+- attributes:
+    label: 확인용 체크박스
+    options:
+    - label: 중복 질문이 아닌지 확인했습니다.
+      required: false
+    - label: 가능한 한 구체적으로 작성했습니다.
+      required: true
+  type: checkboxes
+- attributes:
+    value: 📬 질문을 올려주셔서 감사합니다! 답변이 달리면 알림을 꼭 확인해 주세요.
+  type: markdown
+labels:
+- Q&A
+title: '[질문] '
