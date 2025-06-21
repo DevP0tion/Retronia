@@ -1,39 +1,30 @@
 body:
-- attributes:
-    value: 💬 잡담, 아이디어, 근황 공유 등 자유롭게 이야기해 주세요!
-  type: markdown
-- attributes:
-    description: 다른 팀원이 편하게 불러줄 수 있도록 닉네임을 적어 주세요.
-    label: 닉네임 (선택)
-    placeholder: '예: 뼈개발자 / 엔트짱 / 민수왕자'
-  id: nickname
-  type: input
-  validations:
-    required: false
-- attributes:
-    description: 공유하고 싶은 이야기나 일상, 느낀 점, 밈 등을 적어 주세요.
-    label: 자유롭게 이야기해 주세요!
-    placeholder: '예: 오늘도 버그랑 전투 중이에요. 드디어 AI가 벽을 안 뚫네요!'
-  id: message
-  type: textarea
-  validations:
-    required: true
-- attributes:
-    description: 이야기의 분위기를 간단히 선택해 주세요.
-    label: 지금 기분은 어떤가요?
-    options:
-    - 😀 유쾌한 이야기
-    - 🤔 고민 나눔
-    - 📣 알림/소식
-    - 🎮 게임 관련
-    - 기타
-  id: mood
-  type: dropdown
-  validations:
-    required: false
-- attributes:
-    value: ☕ 이야기 나눠주셔서 감사합니다. 누군가에게 오늘의 활력이 될지도 몰라요!
-  type: markdown
+  - attributes:
+      value: 💬 잡담, 아이디어, 근황 공유 등 자유롭게 이야기해 주세요!
+    type: markdow
+  - attributes:
+      description: 공유하고 싶은 이야기나 일상, 느낀 점, 밈 등을 적어 주세요.
+      label: 자유롭게 이야기해 주세요!
+      placeholder: '예: 오늘도 버그랑 전투 중이에요. 드디어 AI가 벽을 안 뚫네요!'
+    id: message
+    type: textarea
+    validations:
+      required: true
+  - attributes:
+      description: 이야기의 분위기를 간단히 선택해 주세요.
+      options:
+        - 😀 유쾌한 이야기
+        - 🤔 고민 나눔
+        - 📣 알림/소식
+        - 🎮 게임 관련
+        - 기타
+    id: mood
+    type: dropdown
+    validations:
+      required: false
+  - attributes:
+      value: ☕ 이야기 나눠주셔서 감사합니다. 누군가에게 오늘의 활력이 될지도 몰라요!
+    type: markdown
 labels:
-- 자유게시판
+  - 자유게시판
 title: '[자유게시판]'
