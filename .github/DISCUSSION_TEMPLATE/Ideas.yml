@@ -1,0 +1,49 @@
+body:
+- attributes:
+    value: '💡 새로운 기능이나 개선 아이디어가 있으신가요?
+
+      이곳에 자유롭게 제안해 주세요!'
+  type: markdown
+- attributes:
+    description: 제안하고 싶은 아이디어의 핵심 내용을 간단히 적어주세요.
+    label: 아이디어 제목
+    placeholder: '예: ''계절마다 달라지는 배경음악 시스템'''
+  id: idea-title
+  type: input
+  validations:
+    required: true
+- attributes:
+    description: 아이디어의 구체적인 내용과 기대 효과를 설명해 주세요.
+    label: 아이디어 설명
+    placeholder: 이 기능이 어떤 문제를 해결할 수 있고, 플레이어에게 어떤 재미를 줄 수 있을지 작성해 주세요.
+  id: idea-description
+  type: textarea
+  validations:
+    required: true
+- attributes:
+    description: 어떤 영역에 해당하는 아이디어인가요?
+    label: 아이디어 분류
+    options:
+    - 게임플레이
+    - UI/UX
+    - 스토리/세계관
+    - 시스템
+    - 기타
+  id: idea-category
+  type: dropdown
+  validations:
+    required: false
+- attributes:
+    label: 공감 체크
+    options:
+    - label: 이 아이디어가 실제로 적용된다면 유용할 것 같아요.
+      required: false
+    - label: 이미 유사한 기능이 있는지 확인했습니다.
+      required: false
+  type: checkboxes
+- attributes:
+    value: ✨ 멋진 아이디어 감사합니다! 팀 내부 회의나 투표에서 참고될 수 있습니다.
+  type: markdown
+labels:
+- 아이디어
+title: '[아이디어 제안] '
