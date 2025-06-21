@@ -1,0 +1,55 @@
+body:
+- attributes:
+    value: '🗳️ 함께 결정할 항목이 있다면 투표를 제안해 주세요!
+
+      모두의 의견이 프로젝트를 더 좋게 만듭니다.'
+  type: markdown
+- attributes:
+    description: 무엇에 대한 투표인가요?
+    label: 투표 주제
+    placeholder: '예: ''다음 우선 개발 항목 선택'''
+  id: vote-title
+  type: input
+  validations:
+    required: true
+- attributes:
+    description: 선택지를 1줄에 하나씩 입력해 주세요.
+    label: 투표 항목
+    placeholder: '예:
+
+      1. 전투 시스템 개선
+
+      2. UI 리팩토링
+
+      3. 신규 NPC 디자인'
+  id: vote-options
+  type: textarea
+  validations:
+    required: true
+- attributes:
+    default: 0
+    description: 투표 결과를 어떻게 반영할 계획인가요?
+    label: 투표 방식
+    options:
+    - 단일 선택
+    - 복수 선택 허용
+    - 의견 수렴 참고용
+    - 결정용
+  id: vote-type
+  type: dropdown
+  validations:
+    required: false
+- attributes:
+    label: 확인 사항
+    options:
+    - label: 중복된 투표 제안이 아닌지 확인했습니다.
+      required: false
+    - label: 이 투표가 팀 결정에 실질적인 도움이 될 수 있다고 생각합니다.
+      required: true
+  type: checkboxes
+- attributes:
+    value: 🗓️ 투표 제안 감사합니다! 다른 팀원들과 함께 결정해 나가요.
+  type: markdown
+labels:
+- 팀 투표
+title: '[투표 제안] '
