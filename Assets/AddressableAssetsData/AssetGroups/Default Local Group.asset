@@ -13,27 +13,19 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: 4c528beebeb17a64d8af6ceeda0bd945
   m_SerializeEntries:
-  - m_GUID: 819b804024ffab943abbac429d36f0e2
-    m_Address: BasicBullet
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Bullet
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3cf9f352ba94e1c43872392130a81987
-    m_Address: Item
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Item
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 09fae934d24d07f4b9e1761ef8166373
     m_Address: Assets/Arts/Sounds
     m_ReadOnly: 0
     m_SerializedLabels:
     - Audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d150f8386e011349abdbf1aaa3ec62b
+    m_Address: Assets/Data/Prefabs/Bullet/ExampleBulletProperties.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Bullet
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 39076c5dccabce14cb0f2df53f63b22c
     m_Address: Assets/Settings/AudioMixer.mixer
@@ -41,14 +33,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Audio
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1f1e4ca773fb7eb479c2ced4fbc1d202
-    m_Address: Assets/Data/Character
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Character
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2d150f8386e011349abdbf1aaa3ec62b
-    m_Address: Assets/Data/Prefabs/Bullet/ExampleBulletProperties.asset
+  - m_GUID: 819b804024ffab943abbac429d36f0e2
+    m_Address: BasicBullet
     m_ReadOnly: 0
     m_SerializedLabels:
     - Bullet
@@ -57,5 +43,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 13b2ae3b7933d214a9f7b7353c3dfa40, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 11335afd84947b64ebab04ed657dbe00, type: 2}
     - {fileID: 11400000, guid: 3810a2cd1987f4a4786ea3a7c653f9cd, type: 2}
+    - {fileID: 11400000, guid: 11335afd84947b64ebab04ed657dbe00, type: 2}

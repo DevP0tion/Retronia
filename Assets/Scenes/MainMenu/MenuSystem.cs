@@ -31,13 +31,6 @@ namespace Retronia.Scenes.MainMenu
     {
       // TODO 생성시 명칭 설정 가능하게 구현
       var newData = SAVE.Current = new SAVE(nameLabel.text);
-      newData.Init();
-      newData.player.inventory.AddItem("Gem", 10);
-      newData.player.inventory.AddItem("Meteorite", 2);
-      newData.player.inventory.AddItem("Cannon", 1);
-      newData.player.inventory.AddItem("Core", 1);
-      newData.player.inventory.AddItem("Engine", 1);
-      newData.player.AddCharacter("Alpha");
       SceneManager.LoadScene(SceneNames.BeforeJoin);
     }
     

@@ -1,12 +1,13 @@
 using NaughtyAttributes;
 using Retronia.Contents.Entities;
 using Retronia.Contents.Properties;
+using Retronia.Utils;
 using Retronia.Worlds;
 using UnityEngine;
 
 namespace Retronia.Contents
 {
-  public class Bullet : MonoBehaviour
+  public class Bullet : PooledObject
   {
     #region State
 
@@ -20,6 +21,16 @@ namespace Retronia.Contents
     public Team team = Team.None;
     public Vector2 direction;
 
+    public virtual BulletProperties Properties
+    {
+      get => properties;
+      set
+      {
+        properties = value;
+        speed = properties.speed;
+        damage = properties.damageMultiplier;
+      }
+    }
     #endregion
     
     #region Binding
@@ -65,29 +76,22 @@ namespace Retronia.Contents
 
     #endregion
     
-    #region Interface
-
-    public virtual BulletProperties Properties
-    {
-      get => properties;
-      set
-      {
-        properties = value;
-        speed = properties.speed;
-        damage = properties.damageMultiplier;
-      }
-    }
+    #region Feature
 
     [Button]
-    public virtual void Release()
+    public override void Release()
     {
-      BulletManager.Release(this);
+      base.Release();
+      // BulletManager.Release(this);
     }
 
     public virtual void OnHit(Entity entity)
     {
-      entity.healthPoint.Value -= damage;
-      Release();
+      if (gameObject.activeSelf && team != entity.team)
+      {
+        entity.healthPoint.Value -= damage;
+        Release();
+      }
     }
 
     #endregion

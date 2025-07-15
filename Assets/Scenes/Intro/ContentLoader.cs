@@ -24,9 +24,9 @@ namespace Retronia.Scenes.Intro
     
     #region Unity Events
     
-    private async void Start()
+    private void Start()
     {
-      await Load();
+      Load();
       
       // 로딩이 완료됬을 시 게임을 시작할 수 있게 설정
       entryText.StringReference = new LocalizedString("General", "Intro_finished");
@@ -35,21 +35,18 @@ namespace Retronia.Scenes.Intro
     
     #endregion
 
-    public async Task Load()
+    public void Load()
     {
       var (sharedTableLoader, stringTableHandle) = Localizer.Load();
       var (mixerHandle, clipHandle ) = AudioManager.Load();
       GameManager.Instance.Load();
-      var saveTask = SAVE.Load("default", true);
 
       (string name, AsyncOperationHandle loader)[] loaderList = {
         ("Shared Table", sharedTableLoader),
         ("언어 번들", stringTableHandle),
-        ("아이템 정보", ItemProperties.Load()),
         ("탄환 정보", BulletProperties.Load()),
         ("소리 설정", mixerHandle),
         ("음원", clipHandle),
-        ("캐릭터 정보", CharacterProperties.Load())
       };
 
       foreach (var operation in loaderList)
@@ -74,7 +71,7 @@ namespace Retronia.Scenes.Intro
         operation.loader.WaitForCompletion();
       }
 
-      var saveData = SAVE.Current = await saveTask;
+      // var saveData = SAVE.Current = await saveTask;
       //
       // saveData.Init();
       // saveData.player.inventory.AddItem("Gem", 10);

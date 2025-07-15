@@ -36,7 +36,6 @@ namespace Retronia.Core
     #if UNITY_EDITOR
     // 유니티 에디터 전용 에셋 로딩 확인용 코드
     
-    public SerializableDictionary<string, ItemProperties> loadedItems = new();
     public SerializableDictionary<string, BulletProperties> loadedBullets = new();
     public SerializableDictionary<string, AudioClip> loadedAudios = new();
     #endif

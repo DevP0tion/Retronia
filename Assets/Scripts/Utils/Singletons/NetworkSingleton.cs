@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Retronia.Utils.Singletons
 {
-  public class NetworkSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
+  public class NetworkSingleton<T> : NetworkBehaviour where T : NetworkSingleton<T>
   {
     private static T instance;
 
@@ -16,19 +16,13 @@ namespace Retronia.Utils.Singletons
         // 해당 컴포넌트를 가지고 있는 게임 오브젝트를 찾아서 반환한다.
         instance = (T)FindAnyObjectByType(typeof(T));
 
-        if (instance != null) return instance; // 인스턴스를 찾지 못한 경우
-        
-        // 새로운 게임 오브젝트를 생성하여 해당 컴포넌트를 추가한다.
-        var obj = new GameObject(typeof(T).Name, typeof(T));
-        
-        // 생성된 게임 오브젝트에서 해당 컴포넌트를 instance에 저장한다.
-        instance = obj.GetComponent<T>();
-
-        return instance;
+        return instance; // 인스턴스를 찾지 못한 경우
       }
     }
+    
+    public static bool IsActive => instance != null;
 
-    public void OnDestroy()
+    protected virtual void OnDestroy()
     {
       instance = null;
     }

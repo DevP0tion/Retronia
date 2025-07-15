@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Retronia.Utils
 {
@@ -64,6 +65,20 @@ namespace Retronia.Utils
       var rad = (angle + 90f) * Mathf.Deg2Rad;
       return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
     }
+
+    /// <summary>
+    /// 두 각도의 모듈러 차이를 구합니다.
+    /// </summary>
+    /// <param name="angle1"></param>
+    /// <param name="angle2"></param>
+    /// <returns></returns>
+    public static float GetAngleDiff(float angle1, float angle2)
+    {
+      float diff = Mathf.Abs(angle1 - angle2) % 360f;
+      if (diff > 180f)
+        diff = 360f - diff;
+      return diff;
+    }
     
     #endregion
     
@@ -86,6 +101,46 @@ namespace Retronia.Utils
       var angle = origin.eulerAngles.z * Mathf.Deg2Rad;
       return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
+    
+    #endregion
+    
+    #region Array
+    
+    /// <summary>
+    /// 배열 내부의 랜덤한 값를 추출합니다.
+    /// </summary>
+    /// <param name="array">값을 추출할 배열입니다.</param>
+    /// <returns>배열 내부의 무작위로 추출된 값입니다.</returns>
+    public static T GetRandom<T>(this T[] array)
+    {
+      return array[Random.Range(0, array.Length)];
+    }
+    
+    #endregion
+
+    #region Enum
+
+    /// <summary>
+    ///   열거형의 목록을 가져와서 기존 열거형 값이랑 비교 후 다음 열거형을 반환
+    /// </summary>
+    /// <param name="value">원본 열거형의 값</param>
+    /// <param name="reverse">역방향으로 가져올 것인지</param>
+    /// <typeparam name="T">값을 받아올 열거형의 종류</typeparam>
+    /// <returns></returns>
+    public static T Next<T>(this T value, bool reverse = false) where T : struct, Enum
+    {
+      var enums = (T[])Enum.GetValues(typeof(T));
+      var index = Array.IndexOf(enums, value);
+      index = reverse ? index - 1 : index + 1;
+
+      return enums[index < 0 ? enums.Length - 1 : index > enums.Length - 1 ? 0 : index];
+    }
+
+    #endregion
+    
+    #region Layer
+    
+    public static bool Contains(this LayerMask mask, int layer) => (mask.value & (1 << layer)) != 0;
     
     #endregion
   }

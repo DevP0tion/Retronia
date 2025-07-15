@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b74874e954348049ffe959c9b1e87a3, type: 3}
   m_Name: ExampleBulletProperties
   m_EditorClassIdentifier: 
-  bulletName: BasicBullet
+  bulletPath:
+    m_AssetGUID: 819b804024ffab943abbac429d36f0e2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   speed: 0.2
   damageMultiplier: 1

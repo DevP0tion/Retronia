@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Mirror;
+using NaughtyAttributes;
 using Retronia.Contents.Properties;
+using Retronia.Players;
 using Retronia.Scenes.World;
 using Retronia.Utils;
 using Retronia.Worlds;
@@ -9,34 +12,16 @@ using UnityEngine.Events;
 
 namespace Retronia.Contents.Entities
 {
-  public class Entity : NetworkBehaviour
+  public partial class Entity : NetworkBehaviour
   {
     #region State
+    private const string State = "State";
 
-    [Header("Entity State")] 
-    
-    [SerializeField] [GetSet(nameof(Data))] protected EntityProperties data;
-    public Stat speed = 1;
-    public Stat rotateSpeed = 8;
-    public Vector2 direction = Vector2.up;
-    public RangedStat healthPoint;
-    public Team team = Team.None;
-
-    
-    
-    #endregion
-
-    #region Bindings
-    [Header("Entity Bindings")]
-    
-    [SerializeField] protected Rigidbody2D body;
-    public List<Weapon> weapons = new();
-
-    #endregion
-
-    #region Exports
-
-    public Rigidbody2D Body => body;
+    [Foldout(State), SerializeField, GetSet(nameof(Data))] protected EntityProperties data;
+    [Foldout(State)] public float speed = 1;
+    [Foldout(State)] public Stat rotateSpeed = 8;
+    [Foldout(State)] public RangedStat healthPoint;
+    [Foldout(State)] public Team team = Team.None;
 
     public virtual EntityProperties Data
     {
@@ -52,13 +37,32 @@ namespace Retronia.Contents.Entities
         }
       }
     }
+    
+    #endregion
+    
+    #region Bindings
+
+    private const string Binding = "Binding";
+    
+    [Foldout(Binding)] public List<Weapon> weapons = new();
 
     #endregion
 
     #region Unity Events
 
-    private void Awake()
+    private void Update()
     {
+      if(isMove)
+        body.AddForce(body.rotation.ToDirection() * (speed * Time.deltaTime), ForceMode2D.Impulse);
+    }
+
+    private void FixedUpdate()
+    {
+      if (!NetworkServer.active) UpdateClientSync();
+      else
+      {
+        Rotation = Mathf.LerpAngle(Rotation, preferredRotation, Time.fixedDeltaTime * rotateSpeed);
+      }
     }
 
     #endregion
@@ -67,15 +71,14 @@ namespace Retronia.Contents.Entities
 
     public override void OnStartLocalPlayer()
     {
+      // 플레이어 캐릭터 설정
       base.OnStartLocalPlayer();
       PlayerController.Instance.Entity = this;
-      if (!NetworkServer.active)
-      {
-        GetComponent<NetworkTransformUnreliable>().syncDirection = SyncDirection.ClientToServer;
-      }
     }
 
     #endregion
+    
+    #region Feature
     
     public void Shoot(Vector3 targetPosition)
     {
@@ -84,5 +87,7 @@ namespace Retronia.Contents.Entities
         weapon.Shoot(targetPosition);
       }
     }
+    
+    #endregion
   }
 }

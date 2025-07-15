@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using Retronia.Utils;
 
 namespace Retronia.IO
 {
@@ -73,6 +72,9 @@ namespace Retronia.IO
 
     public static T Get<T>(this JObject json, string key, T defaultValue = default)
       => json.TryGetValue(key, out var token) ? token.Value<T>() : defaultValue;
+
+    public static T Get<T>(this JToken token, T defaultValue = default)
+      => token.Value<T>() ?? defaultValue;
     
     #endregion
 

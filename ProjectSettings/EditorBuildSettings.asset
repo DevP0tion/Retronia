@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 325e544ef922d474aa6459f5b79e904a
   - enabled: 1
-    path: Assets/Scenes/Lobby/Lobby.unity
-    guid: 03b282a47ed86eb41b1ca1bcf8553992
-  - enabled: 1
     path: Assets/Scenes/World/World.unity
     guid: 7481d6a159472f34ea1134849d25f80e
   m_configObjects:
@@ -22,6 +19,7 @@ EditorBuildSettings:
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 8dc90d0b2ad5c0b4c8dcb405b0979fcf, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: d3bbc12a31020c54db889317008d7e1c, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 3af246eb9560eeb438a9b7560cb5451d, type: 2}
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: dc794524b31b165479f097db836fdc0d, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 0e2edbb19dc7cae42abe44767c776303, type: 2}
   m_UseUCBPForAssetBundles: 0

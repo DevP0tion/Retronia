@@ -1,0 +1,20 @@
+{
+    "asset": "3ca373c7c818317468f5dc928ce74c56",
+    "fileName": "0197b806-88cf-76df-af03-5a63a6223210.png",
+    "prompt": "pixelart, player, shooter",
+    "negativePrompt": "",
+    "model": "242b56c1-2224-41c4-8949-2ba760bbfc69",
+    "modelName": "16-bit Pixel",
+    "customSeed": -1,
+    "w3CTraceId": "96f45a1bc74afb61eee52ec583b5a576",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

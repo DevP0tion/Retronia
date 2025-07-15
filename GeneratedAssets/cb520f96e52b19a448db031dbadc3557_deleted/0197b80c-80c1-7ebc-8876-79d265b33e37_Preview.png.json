@@ -1,0 +1,11 @@
+{
+    "asset": "cb520f96e52b19a448db031dbadc3557",
+    "fileName": "0197b80c-80c1-7ebc-8876-79d265b33e37_Preview.png",
+    "prompt": "Water, 2d",
+    "negativePrompt": "",
+    "model": "575ecf67-4425-4939-97b9-5e138b8ee234",
+    "modelName": "Unity Texture2D",
+    "customSeed": 928329673,
+    "w3CTraceId": "b07630771600a30cdb7d62f9f1497335",
+    "refinementMode": "Generation"
+}
